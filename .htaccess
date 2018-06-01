@@ -6,7 +6,7 @@ RewriteBase /AdminLTE_MVC
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-#RewriteRule ^([^/]+)$ index.php?action=$1
+#RewriteRule ^([^/]+)/$ index.php?action=$1
 
 #RewriteRule ^dashboard/([^/]+)$ index.php?action=dashboard&navigate=$1
 #RewriteRule ^dashboard/src/(.*) src/$1
