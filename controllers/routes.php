@@ -21,6 +21,11 @@ class Routes {
                 case "blankpage":
                 $module = "views/pages/blankpage.php";
                 break;
+                case "nuevocliente":
+                break;
+                case "clientes":
+                $module = "views/pages/clientes.php";
+                break;
                 default:
                 $module = "views/pages/error404.php";
             }
