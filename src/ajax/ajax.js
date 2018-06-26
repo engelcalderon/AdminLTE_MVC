@@ -5,6 +5,7 @@ $("#loginForm").submit( function(e) {
         type: 'POST',
         url: "ajax/usersAjax.php",
         data: {
+            login: 1,
             email: $("#loginEmail").val(),
             password:$("#loginPassword").val()
         },
@@ -21,6 +22,46 @@ $("#loginForm").submit( function(e) {
                 $("#loginErrorBox").show();
                 $("#loginErrorMessage").text(response.message);
             }
+        },
+        error: function(response) {
+
+        }
+    });
+});
+
+$("#registerForm").submit( function(e) {
+    e.preventDefault();
+
+    $("#registerErrorBox").hide();
+    if ($("#registerPassword").val() != $("#registerRetypedPassword").val()) {
+        $("#registerErrorBox").show();
+        $("#registerErrorMessage").text("Password does not match");
+        return;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: "ajax/usersAjax.php",
+        data: {
+            register: 1,
+            name: $("#registerName").val(),
+            email: $("#registerEmail").val(),
+            password:$("#registerPassword").val()
+        },
+        beforeSend: function(response) {
+            console.log("loading");
+        },
+        success: function(response) {
+            response = JSON.parse(response);
+            
+            if (response.status == "success") {
+                window.location.href = "./login";
+            }
+            else if (response.status == "error") {
+                $("#registerErrorBox").show();
+                $("#registerErrorMessage").text("Something went wrong");
+            }
+            console.log(response);
         },
         error: function(response) {
 

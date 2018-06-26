@@ -10,23 +10,28 @@
   <div class="register-box-body">
     <p class="login-box-msg">Register a new membership</p>
 
-    <form method="post">
+    <div id="registerErrorBox" class="callout callout-danger" style="display:none;">
+      <h4>Error!</h4>
+      <p id="registerErrorMessage">Something went wrong</p>
+    </div>
+
+    <form method="post" id="registerForm">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Full name" name="name">
+        <input type="text" class="form-control" placeholder="Full name" name="name" id="registerName">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email" name="email">
+        <input type="email" class="form-control" placeholder="Email" name="email" id="registerEmail">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" name="password">
+        <input type="password" class="form-control" placeholder="Password" name="password" id="registerPassword">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
-      <!--div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Retype password">
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="Retype password" id="registerRetypedPassword">
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-      </div> -->
+      </div>
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
@@ -43,24 +48,11 @@
       </div>
     </form>
 
-    <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using
-        Facebook</a>
-      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using
-        Google+</a>
-    </div>
-
-    <a href="login.html" class="text-center">I already have a membership</a>
+    <a href="<?php echo URL; ?>login" class="text-center">I already have a membership</a>
   </div>
   <!-- /.form-box -->
 </div>
 <!-- /.register-box -->
-
-<?php 
-  $controller = new Controller();
-  $controller->registroUsuarioController();
-?>
 
 <?php
     include "views/public/modules/footer.php";

@@ -6,21 +6,19 @@
 
     #Registro de usuario
   	#-------------------------------------
-  	static public function registroUsuarioModel($datosModel, $tabla){
+  	static public function registroUsuarioModel($data){
 
-      $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(name, email, password) VALUES (:name, :email, :password)");
+      $stmt = Conexion::conectar()->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
 
-      $stmt -> bindParam(":name",$datosModel["name"], PDO::PARAM_STR);
-      $stmt -> bindParam(":email",$datosModel["email"], PDO::PARAM_STR);
-      $stmt -> bindParam(":password",$datosModel["password"], PDO::PARAM_STR);
+      $stmt -> bindParam(":name",$data["name"], PDO::PARAM_STR);
+      $stmt -> bindParam(":email",$data["email"], PDO::PARAM_STR);
+      $stmt -> bindParam(":password",$data["password"], PDO::PARAM_STR);
 
       if($stmt -> execute()){
         return "success";
       }else{
         return "error";
       }
-        $stmt -> close();
-
     }
 
     #Ingreso de usuario

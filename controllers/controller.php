@@ -17,25 +17,23 @@ class Controller {
         }
     }
 
-    public function registerUserController(){
-		if( isset($_POST["name"]) && isset($_POST["password"]) && isset($_POST["email"]) ){
+    public function registerUserController($data){
+        $passwordEncriptada = crypt($data["password"], "/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/");
+        
+        $data["password"] = $passwordEncriptada;
 
-		    $passwordEncriptada = crypt($_POST["password"], "/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/");
-            $datosController = array( "name" => $_POST["name"],
-                                    "email" => $_POST["email"],
-									"password" => $passwordEncriptada,
-									);
-                
-			$respuesta = Datos::registroUsuarioModel($datosController, "users");
+        $response = Datos::registroUsuarioModel($data);
 
-			if($respuesta == "success"){
-				header("location:index.php?action=dashboard");
-            }
-            else{
-                echo "Error";
-				//header("location:index.php?action=register");
-			}
-			}
+        if($response == "success"){
+           echo json_encode([
+               "status" => "success"
+           ]);
+        }
+        else{
+            echo json_encode([
+                "status" => "error"
+            ]);
+        }
     }
     
     public function loginUserController($data) {
