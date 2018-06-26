@@ -1,3 +1,16 @@
+<?php
+  if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+  }
+  if (isset($_SESSION["validUser"])) {
+    if ($_SESSION["validUser"] == FALSE) {
+      header("location:" . URL . "login");
+    }
+  }
+  else {
+    header("location:" . URL . "login");
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>

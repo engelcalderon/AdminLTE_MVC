@@ -12,6 +12,9 @@ class Controller {
             $view = Routes::handleRoutes($route);
             include $view;
         }
+        else {
+            header("location:" . URL . "dashboard");
+        }
     }
 
     public function registerUserController(){
@@ -41,7 +44,10 @@ class Controller {
         $passwordEncriptada = crypt($data["password"], '/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/');
         
         if($response["email"] == $data["email"] && $response["password"] == $passwordEncriptada ){
-            // $_SESSION["validar"]=true;
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+            $_SESSION["validUser"]=TRUE;
             echo json_encode([
                 "status" => "success"
             ]);
