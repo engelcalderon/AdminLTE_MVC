@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-06-2018 a las 19:27:50
+-- Tiempo de generación: 26-06-2018 a las 18:53:25
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -21,35 +21,34 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `adminlte`
 --
-CREATE DATABASE IF NOT EXISTS `adminlte` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `adminlte`;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cliente`
+-- Estructura de tabla para la tabla `client`
 --
 
-CREATE TABLE `cliente` (
+CREATE TABLE `client` (
   `id` int(11) NOT NULL,
-  `identificacion` varchar(100) NOT NULL,
-  `tipo_identificacion` varchar(100) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `provincia` varchar(50) NOT NULL,
-  `canton` varchar(50) NOT NULL,
-  `distrito` varchar(50) NOT NULL,
-  `barrio` varchar(50) NOT NULL,
-  `direccion` text NOT NULL
+  `identificacion` varchar(50) DEFAULT NULL,
+  `tipoID` varchar(50) DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `nombre_fantasia` varchar(50) DEFAULT NULL,
+  `telefono` varchar(50) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `provincia` varchar(50) DEFAULT NULL,
+  `canton` varchar(50) DEFAULT NULL,
+  `distrito` varchar(50) DEFAULT NULL,
+  `barrio` varchar(50) DEFAULT NULL,
+  `direccion` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `cliente`
+-- Volcado de datos para la tabla `client`
 --
 
-INSERT INTO `cliente` (`id`, `identificacion`, `tipo_identificacion`, `nombre`, `telefono`, `email`, `provincia`, `canton`, `distrito`, `barrio`, `direccion`) VALUES
-(1, '116910920', 'FÃ­sica', 'Frederick Calderon Jimenez', 89871987, 'engel199702@hotmail.com', 'San Jose', 'Perez Zeledon', 'Daniel Flores', 'Residencial Halder', 'San JosÃ© 11903');
+INSERT INTO `client` (`id`, `identificacion`, `tipoID`, `nombre`, `nombre_fantasia`, `telefono`, `email`, `provincia`, `canton`, `distrito`, `barrio`, `direccion`) VALUES
+(52, '116910920', 'FÃ­sica', 'Frederick Calderon Jimenez', 'Engel', '89871987', 'engel199702@hotmail.com', 'San JosÃ©', 'PÃ©rez ZeledÃ³n', 'Daniel Flores', 'Residencial Halder', 'San Jose 11903');
 
 -- --------------------------------------------------------
 
@@ -76,9 +75,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
 --
 
 --
--- Indices de la tabla `cliente`
+-- Indices de la tabla `client`
 --
-ALTER TABLE `cliente`
+ALTER TABLE `client`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `identificacion` (`identificacion`),
   ADD UNIQUE KEY `telefono` (`telefono`),
@@ -96,10 +95,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT de la tabla `cliente`
+-- AUTO_INCREMENT de la tabla `client`
 --
-ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `client`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

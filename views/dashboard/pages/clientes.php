@@ -12,6 +12,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="">Usuarios</a></li>
         <li class="active"> Clientes</li>
       </ol>
     </section>
