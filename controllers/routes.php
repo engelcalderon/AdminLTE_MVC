@@ -2,32 +2,22 @@
 
 class Routes {
 
-        public function handleMainRoutes($route) {
+        public function handleRoutes($route) {
             switch($route) {
                 case "login":
-                $module = "views/pages/login.php";
+                $module = "views/public/pages/login.php";
                 break;
                 case "register":
-                $module = "views/pages/register.php";
+                $module = "views/public/pages/register.php";
+                break;
+                case "dashboard":
+                $module = "views/dashboard/pages/dashboard1.php";
+                break;
+                case "dashboard/clientes":
+                $module = "views/dashboard/pages/clientes.php";
                 break;
                 default:
                 $module = "views/pages/login.php";
-            }
-            return $module;
-        }
-
-        public function handleDashboardRoutes($route) {
-            switch($route) {
-                case "blankpage":
-                $module = "views/pages/blankpage.php";
-                break;
-                case "nuevocliente":
-                break;
-                case "clientes":
-                $module = "views/pages/clientes.php";
-                break;
-                default:
-                $module = "views/pages/error404.php";
             }
             return $module;
         }

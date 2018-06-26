@@ -1,3 +1,7 @@
+<?php
+    include "views/public/modules/header.php";
+?>
+
 <div class="register-box">
   <div class="register-logo">
     <a href="../../index2.html"><b>Admin</b>LTE</a>
@@ -56,4 +60,8 @@
 <?php 
   $controller = new Controller();
   $controller->registroUsuarioController();
+?>
+
+<?php
+    include "views/public/modules/footer.php";
 ?>

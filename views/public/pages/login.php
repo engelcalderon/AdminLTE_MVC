@@ -1,3 +1,7 @@
+<?php
+    include "views/public/modules/header.php";
+?>
+
 <div class="login-box">
   <div class="login-logo">
     <a href="../../index2.html"><b>Admin</b>LTE</a>
@@ -51,4 +55,8 @@
 <?php 
   $controller = new Controller();
   $controller->ingresoUsuarioController();
+?>
+
+<?php
+    include "views/public/modules/footer.php";
 ?>
