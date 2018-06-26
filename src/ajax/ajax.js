@@ -138,8 +138,8 @@ $("#nuevoClientForm").submit(function(e) {
         type: 'POST',
         url: "../ajax/clientsAjax.php",
         data: {
-            tipoID: $("#registroCliente_tipoID").val(),
-            ID: $("#registroCliente_tipoID option:selected").text(),
+            tipoID: $("#registroCliente_tipoID option:selected").text(),
+            ID: $("#registroCliente_identificacion").val(),
             nombre: $("#registroCliente_nombre").val(),
             nfantasia: $("#registroCliente_nombrefantasia").val(),
             telefono: $("#registroCliente_telefono").val(),
