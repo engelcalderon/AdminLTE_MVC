@@ -47,8 +47,9 @@
                                         <div class="col-xs-3">
                                             <label>Tipo</label>
                                             <select class="form-control select2" style="width: 100%;" id="registroCliente_tipoID">
-                                                <option selected="selected">Física</option>
-                                                <option>Jurídica</option>
+                                                <option value="0" selected="selected">Seleccione una opción</option>
+                                                <option value="1">Físca</option>
+                                                <option value="2">Jurídica</option>
                                             </select>
                                         </div>
                                         <div class="col-xs-9">

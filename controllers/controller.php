@@ -56,20 +56,19 @@ class Controller {
 
 
     public function createClientController($data) {
-        // $response = Datos::createClientModel($data);
+        $response = Datos::createClientModel($data);
                 
-        // if ($response["status"] == "success") {
-        //     $client = Datos::getClientModel($data["ID"]);
-        //     if ($client["status"] == "success") {
-        //         echo json_encode(array(
-        //             "status" => "success",
-        //             "client" => $client["data"]
-        //         ));
-        //         return;
-        //     }
-        // }
-        // echo $response;
-        echo "work";
+        if ($response["status"] == "success") {
+            $client = Datos::getClientModel($data["ID"]);
+            if ($client["status"] == "success") {
+                echo json_encode(array(
+                    "status" => "success",
+                    "client" => $client["data"]
+                ));
+                return;
+            }
+        }
+        echo $response;
     }
     
     public function getClientsController() {

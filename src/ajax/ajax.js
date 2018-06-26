@@ -95,10 +95,10 @@ $("#nuevoClientForm").submit(function(e) {
 
     $.ajax({
         type: 'POST',
-        url: "ajax/clientsAjax.php",
+        url: "../ajax/clientsAjax.php",
         data: {
             tipoID: $("#registroCliente_tipoID").val(),
-            ID: $("#registroCliente_identificacion").val(),
+            ID: $("#registroCliente_tipoID option:selected").text(),
             nombre: $("#registroCliente_nombre").val(),
             nfantasia: $("#registroCliente_nombrefantasia").val(),
             telefono: $("#registroCliente_telefono").val(),
@@ -113,38 +113,46 @@ $("#nuevoClientForm").submit(function(e) {
             $("#buttonNewClientSaveChanges").text("Guardando...");
         },
         success: function(response) {
-            // response = JSON.parse(response);
+            response = JSON.parse(response);
             
-            // var html = "";
+            var html = "";
 
-            // if (response.status == "success") {
-            //     html += `
-            //     <tr>
-            //         <td>`+response.client["identificacion"]+`</td>
-            //         <td>`+response.client["tipoID"]+`</td>
-            //         <td>`+response.client["nombre"]+`</td>
-            //         <td>`+response.client["nombre_fantasia"]+`</td>
-            //         <td>`+response.client["telefono"]+`</td>
-            //         <td>`+response.client["email"]+`</td>
-            //         <td>`+response.client["provincia"]+`</td>
-            //         <td>`+response.client["canton"]+`</td>
-            //         <td>`+response.client["distrito"]+`</td>
-            //         <td>`+response.client["barrio"]+`</td>
-            //         <td>`+response.client["direccion"]+`</td>
-            //     </tr>
-            //     `;
-            //     $("#buttonNewClientSaveChanges").text("Guardar cambios");
-            //     $("#modal-default").modal('hide');
-            //     $("#clientsTableBody").append(html);
-            // }
-            // else if (response.status == "error") {
-            //     $("#buttonNewClientSaveChanges").text("Guardar cambios");
-            //     console.log(response);
-            //     // $("#loginErrorBox").show();
-            //     // $("#loginErrorMessage").text(response.message);
-            // }
+            if (response.status == "success") {
+                html += `
+                <tr>
+                    <td>`+response.client["identificacion"]+`</td>
+                    <td>`+response.client["tipoID"]+`</td>
+                    <td>`+response.client["nombre"]+`</td>
+                    <td>`+response.client["nombre_fantasia"]+`</td>
+                    <td>`+response.client["telefono"]+`</td>
+                    <td>`+response.client["email"]+`</td>
+                    <td>`+response.client["provincia"]+`</td>
+                    <td>`+response.client["canton"]+`</td>
+                    <td>`+response.client["distrito"]+`</td>
+                    <td>`+response.client["barrio"]+`</td>
+                    <td>`+response.client["direccion"]+`</td>
+                </tr>
+                `;
+                $("#modal-default").modal('hide');
+                $("#clientsTableBody").append(html);
+            }
+            else if (response.status == "error") {
+                console.log(response);
+                // $("#loginErrorBox").show();
+                // $("#loginErrorMessage").text(response.message);
+            }
             $("#buttonNewClientSaveChanges").text("Guardar cambios");
-            console.log(response);
+            $("#registroCliente_tipoID").val(0);
+            $("#registroCliente_identificacion").val("")
+            $("#registroCliente_nombre").val("")
+            $("#registroCliente_nombrefantasia").val("")
+            $("#registroCliente_telefono").val("")
+            $("#registroCliente_email").val("")
+            $("#registroCliente_provincia").val(0)
+            $("#registroCliente_canton").val(0)
+            $("#registroCliente_distrito").val(0)
+            $("#registroCliente_barrio").val("")
+            $("#registroCliente_direccion").val("")
         },
         error: function(response) {
             $("#buttonNewClientSaveChanges").text("Guardar cambios");

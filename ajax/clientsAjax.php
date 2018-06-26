@@ -20,10 +20,7 @@ if( isset($_POST["tipoID"]) && isset($_POST["ID"]) && isset($_POST["nombre"])
                     "barrio"=>$_POST["barrio"],
                     "direccion"=>$_POST["direccion"]
                 ];
-
-                // $controller = new Controller;
-                // $controller->createClientController($data);
-                echo "here";
-            
+                $controller = new Controller;
+                $controller->createClientController($data);
             }
 ?>
