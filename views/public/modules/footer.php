@@ -4,6 +4,8 @@
 <script src="<?php echo URL; ?>src/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="<?php echo URL; ?>src/plugins/iCheck/icheck.min.js"></script>
+<!-- Ajax to login -->
+<script src="<?php echo URL; ?>src/ajax/ajax.js"></script>
 <script>
   $(function () {
     $('input').iCheck({

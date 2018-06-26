@@ -14,7 +14,7 @@ class Controller {
         }
     }
 
-    public function registroUsuarioController(){
+    public function registerUserController(){
 		if( isset($_POST["name"]) && isset($_POST["password"]) && isset($_POST["email"]) ){
 
 		    $passwordEncriptada = crypt($_POST["password"], "/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/");
@@ -33,34 +33,33 @@ class Controller {
 				//header("location:index.php?action=register");
 			}
 			}
-	}
-
-	public function ingresoUsuarioController(){
-		if( isset($_POST["email"]) && isset($_POST["password"])){
-
-			$datosController = array( "email" => $_POST["email"],
-											"password" => $_POST["password"] );
-            $respuesta = Datos::ingresoUsuarioModel($datosController, "users");
-            
-			$passwordEncriptada = crypt($_POST["password"], '/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/');
-            
-            if($respuesta["email"] == $_POST["email"] && $respuesta["password"] == $passwordEncriptada ){
-				session_start();
-				$_SESSION["validar"]=true;
-				header("location:index.php?action=dashboard");
-			}else{
-				echo "Error";
-				//header("location:index.php?action=register");
-			}
-		}
     }
+    
+    public function loginUserController($data) {
+        $response = Datos::ingresoUsuarioModel($data, "users");
+        
+        $passwordEncriptada = crypt($data["password"], '/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/');
+        
+        if($response["email"] == $data["email"] && $response["password"] == $passwordEncriptada ){
+            // $_SESSION["validar"]=true;
+            echo json_encode([
+                "status" => "success"
+            ]);
+        }
+        else{
+            echo json_encode([
+                "status" => "error",
+                "message" => "Email or Password does not match"
+            ]);
+        }
+    }
+
 
     public function crearNuevoClienteController() {
         if( isset($_POST["registroCliente_tipoID"]) && isset($_POST["registroCliente_identificacion"]) && isset($_POST["registroCliente_nombre"]) 
             && isset($_POST["registroCliente_telefono"]) && isset($_POST["registroCliente_email"]) && isset($_POST["registroCliente_provincia"]) && isset($_POST["registroCliente_canton"])
             && isset($_POST["registroCliente_distrito"]) && isset($_POST["registroCliente_barrio"]) && isset($_POST["registroCliente_direccion"])){
             
-                
             $datosModel = array(
                 "identificacion" => $_POST["registroCliente_identificacion"],
                 "tipo_identificacion" => $_POST["registroCliente_tipoID"],

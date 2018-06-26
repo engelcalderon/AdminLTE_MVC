@@ -4,19 +4,30 @@
 
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+    <a href="<?php echo URL; ?>authentication/login"><b>Admin</b>LTE</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form method="post">
+    <!-- <?php
+      if (!empty($this->data["error"])) {
+        echo $this->data["error"];
+      }
+    ?> -->
+
+    <div id="loginErrorBox" class="callout callout-danger" style="display:none;">
+      <h4>Error!</h4>
+      <p id="loginErrorMessage">User or password does not match</p>
+    </div>
+
+    <form method="post" id="loginForm">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email" name="email">
+        <input type="email" class="form-control" placeholder="Email" name="email" id="loginEmail">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" name="password"> 
+        <input type="password" class="form-control" placeholder="Password" name="password" id="loginPassword"> 
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -35,14 +46,14 @@
       </div>
     </form>
 
-    <div class="social-auth-links text-center">
+    <!-- <div class="social-auth-links text-center">
       <p>- OR -</p>
       <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
         Facebook</a>
       <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
         Google+</a>
     </div>
-    <!-- /.social-auth-links -->
+    /.social-auth-links -->
 
     <a href="#">I forgot my password</a><br>
     <a href="register.html" class="text-center">Register a new membership</a>
@@ -51,11 +62,6 @@
   <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->
-
-<?php 
-  $controller = new Controller();
-  $controller->ingresoUsuarioController();
-?>
 
 <?php
     include "views/public/modules/footer.php";

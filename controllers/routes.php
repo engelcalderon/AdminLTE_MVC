@@ -17,7 +17,7 @@ class Routes {
                 $module = "views/dashboard/pages/clientes.php";
                 break;
                 default:
-                $module = "views/pages/login.php";
+                $module = "views/public/pages/login.php";
             }
             return $module;
         }
