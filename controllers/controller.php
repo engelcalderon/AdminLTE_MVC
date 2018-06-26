@@ -55,51 +55,47 @@ class Controller {
     }
 
 
-    public function crearNuevoClienteController() {
-        if( isset($_POST["registroCliente_tipoID"]) && isset($_POST["registroCliente_identificacion"]) && isset($_POST["registroCliente_nombre"]) 
-            && isset($_POST["registroCliente_telefono"]) && isset($_POST["registroCliente_email"]) && isset($_POST["registroCliente_provincia"]) && isset($_POST["registroCliente_canton"])
-            && isset($_POST["registroCliente_distrito"]) && isset($_POST["registroCliente_barrio"]) && isset($_POST["registroCliente_direccion"])){
-            
-            $datosModel = array(
-                "identificacion" => $_POST["registroCliente_identificacion"],
-                "tipo_identificacion" => $_POST["registroCliente_tipoID"],
-                "nombre" => $_POST["registroCliente_nombre"],
-                "telefono" => $_POST["registroCliente_telefono"],
-                "email" => $_POST["registroCliente_email"],
-                "provincia" => $_POST["registroCliente_provincia"],
-                "canton" => $_POST["registroCliente_canton"],
-                "distrito" => $_POST["registroCliente_distrito"],
-                "barrio" => $_POST["registroCliente_barrio"],
-                "direccion" => $_POST["registroCliente_direccion"],
-            );
-           
-            $respuesta = Datos::crearNuevoClienteModel($datosModel, "cliente");
-            
-            if($respuesta != "success" ){
-                echo "Error";
-            }
-        }
+    public function createClientController($data) {
+        // $response = Datos::createClientModel($data);
+                
+        // if ($response["status"] == "success") {
+        //     $client = Datos::getClientModel($data["ID"]);
+        //     if ($client["status"] == "success") {
+        //         echo json_encode(array(
+        //             "status" => "success",
+        //             "client" => $client["data"]
+        //         ));
+        //         return;
+        //     }
+        // }
+        // echo $response;
+        echo "work";
     }
     
-    public function mostrarClientesController() {
-        $clientes = Datos::mostrarClientesModel();
+    public function getClientsController() {
+        $clients = Datos::getClientsModel();
 
-        foreach($clientes as $cliente) {
-            echo "
-                <tr>
-                  <td>".$cliente["identificacion"]."</td>
-                  <td>".$cliente["tipo_identificacion"]."</td>
-                  <td>".$cliente["nombre"]."</td>
-                  <td>Sin asignar</td>
-                  <td>".$cliente["telefono"]."</td>
-                  <td>".$cliente["email"]."</td>
-                  <td>".$cliente["provincia"]."</td>
-                  <td>".$cliente["canton"]."</td>
-                  <td>".$cliente["distrito"]."</td>
-                  <td>".$cliente["barrio"]."</td>
-                  <td>".$cliente["direccion"]."</td>
-                </tr>
-            ";
+        if ($clients["status"] == "success") {
+            foreach($clients["data"] as $key => $value) {
+                echo "
+                    <tr>
+                        <td>".$value["identificacion"]."</td>
+                        <td>".$value["tipoID"]."</td>
+                        <td>".$value["nombre"]."</td>
+                        <td>".$value["nombre_fantasia"]."</td>
+                        <td>".$value["telefono"]."</td>
+                        <td>".$value["email"]."</td>
+                        <td>".$value["provincia"]."</td>
+                        <td>".$value["canton"]."</td>
+                        <td>".$value["distrito"]."</td>
+                        <td>".$value["barrio"]."</td>
+                        <td>".$value["direccion"]."</td>
+                    </tr>
+                ";
+            }
+        }
+        else {
+            echo $client["message"];
         }
     }
 

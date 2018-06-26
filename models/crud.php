@@ -34,38 +34,97 @@
       $stmt->close();
     }
 
-    #Crear nuevo cliente
-    #-------------------------------------
-    public function crearNuevoClienteModel($datosModel, $tabla){
-
-      $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(
-        identificacion, tipo_identificacion, nombre, telefono, email, provincia, canton, distrito, barrio, direccion) 
-        VALUES (:identificacion, :tipo_identificacion, :nombre, :telefono, :email, :provincia, :canton, :distrito, :barrio, :direccion)");
-
-      $stmt -> bindParam(":identificacion",$datosModel["identificacion"], PDO::PARAM_STR);
-      $stmt -> bindParam(":tipo_identificacion",$datosModel["tipo_identificacion"], PDO::PARAM_STR);
-      $stmt -> bindParam(":nombre",$datosModel["nombre"], PDO::PARAM_STR);
-      $stmt -> bindParam(":telefono",$datosModel["telefono"], PDO::PARAM_STR);
-      $stmt -> bindParam(":email",$datosModel["email"], PDO::PARAM_STR);
-      $stmt -> bindParam(":provincia",$datosModel["provincia"], PDO::PARAM_STR);
-      $stmt -> bindParam(":canton",$datosModel["canton"], PDO::PARAM_STR);
-      $stmt -> bindParam(":distrito",$datosModel["distrito"], PDO::PARAM_STR);
-      $stmt -> bindParam(":barrio",$datosModel["barrio"], PDO::PARAM_STR);
-      $stmt -> bindParam(":direccion",$datosModel["direccion"], PDO::PARAM_STR);
-
-      if($stmt -> execute()){
-        return "success";
-      }else{
-        return "error";
+    #Creacion de nuevo cliente
+  	#-------------------------------------
+    static public function createClientModel($data){
+      try {
+        $stmt = Conexion::conectar()->prepare("INSERT INTO client(identificacion, tipoID, nombre, nombre_fantasia, telefono, email, provincia, canton, distrito, barrio, direccion) 
+            VALUES (:identificacion, :tipo_identificacion, :nombre, :nfantasia, :telefono, :email, :provincia, :canton, :distrito, :barrio, :direccion)");
+    
+          $stmt -> bindParam(":identificacion",$data["ID"], PDO::PARAM_STR);
+          $stmt -> bindParam(":tipo_identificacion",$data["tipoID"], PDO::PARAM_STR);
+          $stmt -> bindParam(":nombre",$data["nombre"], PDO::PARAM_STR);
+          $stmt -> bindParam(":nfantasia",$data["nfantasia"], PDO::PARAM_STR);
+          $stmt -> bindParam(":telefono",$data["telefono"], PDO::PARAM_STR);
+          $stmt -> bindParam(":email",$data["email"], PDO::PARAM_STR);
+          $stmt -> bindParam(":provincia",$data["provincia"], PDO::PARAM_STR);
+          $stmt -> bindParam(":canton",$data["canton"], PDO::PARAM_STR);
+          $stmt -> bindParam(":distrito",$data["distrito"], PDO::PARAM_STR);
+          $stmt -> bindParam(":barrio",$data["barrio"], PDO::PARAM_STR);
+          $stmt -> bindParam(":direccion",$data["direccion"], PDO::PARAM_STR);
+          
+          if ($stmt -> execute()) {
+                return array(
+                    "status" => "success"
+                );
+          }
+        
+          return array(
+            "status" => "error",
+            "message" => "Unknown"
+        );
+    }
+    catch (PDOExecption $e) {
+        return array(
+            "status" => "error",
+            "message" => $e->getMessage()
+        );
       }
     }
 
-    public function mostrarClientesModel() {
-      $stmt = Conexion::conectar()->prepare("SELECT * FROM cliente");
+    #Obtener datos de todos los clientes
+  	#-------------------------------------
+    static public function getClientsModel() {
+        try {
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM client");
 
-      $stmt->execute();
+          if ($stmt->execute()) {
+              return array(
+                  "status"=> "success",
+                  "data" => $stmt->fetchAll()
+              );
+          }
 
-      return $stmt->fetchAll();
+          return array(
+              "status" => "error",
+              "message" => "Unknown"
+          );
+          
+      }
+      catch (PDOExecption $e) {
+          return array(
+              "status" => "error",
+              "message" => $e->getMessage()
+          );
+      }
     }
+
+    #Obtener datos de un cliente
+  	#-------------------------------------
+    static public function getClientModel($identificacion) {
+      try {
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM client WHERE identificacion = :identificacion");
+          $stmt->bindParam(":identificacion",$identificacion,PDO::PARAM_STR);
+
+          if ($stmt->execute()) {
+              return array(
+                  "status"=> "success",
+                  "data" => $stmt->fetch()
+              );
+          }
+
+          return array(
+              "status" => "error",
+              "message" => "Unknown"
+          );
+          
+      }
+      catch (PDOExecption $e) {
+          return array(
+              "status" => "error",
+              "message" => $e->getMessage()
+          );
+      }
+  }
 
   }

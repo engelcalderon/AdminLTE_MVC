@@ -23,7 +23,7 @@
           <div class="box">
             <div class="box-header">
               <!-- <h3 class="box-title">Clientes</h3> -->
-              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+              <button type="button" id="buttonNuevoCliente" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
                 Añadir nuevo cliente
               </button>
             </div>
@@ -38,22 +38,22 @@
                         <h4 class="modal-title">Nuevo cliente</h4>
                     </div>
 
-                    <form method="post">
+                    <form method="post" id="nuevoClientForm">
                     
                         <div class="modal-body">
 
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-xs-6">
-                                            <label>Tipo de identificacion</label>
-                                            <select class="form-control select2" style="width: 100%;" name="registroCliente_tipoID">
+                                        <div class="col-xs-3">
+                                            <label>Tipo</label>
+                                            <select class="form-control select2" style="width: 100%;" id="registroCliente_tipoID">
                                                 <option selected="selected">Física</option>
                                                 <option>Jurídica</option>
                                             </select>
                                         </div>
-                                        <div class="col-xs-6">
+                                        <div class="col-xs-9">
                                             <label>Identificacion</label>
-                                            <input type="text" class="form-control" name="registroCliente_identificacion" placeholder="000 ...">
+                                            <input type="text" class="form-control" id="registroCliente_identificacion" placeholder="1-11 ...">
                                         </div>
                                     </div>
                                 </div>
@@ -62,11 +62,11 @@
                                     <div class="row">
                                         <div class="col-xs-6">
                                             <label>Nombre completo</label>
-                                            <input type="text" class="form-control" name="registroCliente_nombre" placeholder="Nombre ...">
+                                            <input type="text" class="form-control" id="registroCliente_nombre" placeholder="Nombre ...">
                                         </div>
                                         <div class="col-xs-6">
                                             <label>Nombre fantasia</label>
-                                            <input type="text" class="form-control" name="registroCliente_nombrefantasia" placeholder="Fantasia ...">
+                                            <input type="text" class="form-control" id="registroCliente_nombrefantasia" placeholder="Fantasia ...">
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-phone"></i>
                                             </div>
-                                                <input type="text" class="form-control" name="registroCliente_telefono" data-inputmask='"mask": "(999) 9999-9999"' data-mask>
+                                                <input type="text" class="form-control" id="registroCliente_telefono" data-inputmask='"mask": "(999) 9999-9999"' data-mask>
                                             </div>   
                                         </div>
                                         <div class="col-xs-6">
@@ -88,7 +88,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-envelope"></i>
                                             </div>
-                                                <input type="text" class="form-control" name="registroCliente_email" placeholder="Email ...">
+                                                <input type="text" class="form-control" id="registroCliente_email" placeholder="Email ...">
                                             </div> 
                                         </div>
                                     </div>
@@ -96,41 +96,39 @@
 
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-xs-6">
+                                        <div class="col-xs-4">
                                             <label>Provincia</label>
-                                            <select class="form-control select2" style="width: 100%;" name="registroCliente_provincia">
-                                                <option selected="selected">San Jose</option>
-                                                <option>Alajuela</option>
-                                                <option>Cartago</option>
-                                                <option>Heredia</option>
-                                                <option>Guanacaste</option>
-                                                <option>Puntarenas</option>
-                                                <option>Limon</option>                                            
+                                            <select class="form-control select2" style="width: 100%;" id="registroCliente_provincia" onChange="getCantones(this.value)">
+                                                <option value="0" selected="selected">Seleccione una opción</option>      
                                             </select>
                                         </div>
-                                        <div class="col-xs-6">
+                                        <div class="col-xs-4">
                                             <label>Canton</label>
-                                            <input type="text" class="form-control" name="registroCliente_canton" placeholder="Canton ...">
+                                            <select class="form-control select2" style="width: 100%;" id="registroCliente_canton" onChange="getDistritos(this.value)">
+                                                <option value="0" selected="selected">Seleccione una opción</option>
+                                                <section "mostrarCantones"></section>                                
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <label>Distrito</label>
+                                            <select class="form-control select2" style="width: 100%;" id="registroCliente_distrito">
+                                                <option value="0" selected="selected">Seleccione una opción</option>      
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-xs-6">
-                                            <label>Distrito</label>
-                                            <input type="text" class="form-control" name="registroCliente_distrito" placeholder="Distrito ...">
-                                        </div>
-                                        <div class="col-xs-6">
+                                        <div class="col-xs-4">
                                             <label>Barrio</label>
-                                            <input type="text" class="form-control" name="registroCliente_barrio" placeholder="Barrio ...">
+                                            <input type="text" class="form-control" id="registroCliente_barrio" placeholder="Barrio ...">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <label>Otras señas</label>
+                                            <textarea class="form-control" rows="1" id="registroCliente_direccion" placeholder="Direccion ..."></textarea>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Otras señas</label>
-                                    <textarea class="form-control" rows="3" name="registroCliente_direccion" placeholder="Direccion ..."></textarea>
                                 </div>
                                 
                             
@@ -138,7 +136,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                            <button type="submit" id="buttonNewClientSaveChanges" class="btn btn-primary">Guardar cambios</button>
                         </div>
                     
                     </form>
@@ -156,9 +154,9 @@
                 <thead>
                 <tr>
                   <th>Identificacion</th>
-                  <th>Tipo de identificacion</th>
-                  <th>Nombre completo</th>
-                  <th>Nombre fantasia</th>
+                  <th>Tipo</th>
+                  <th>Nombre</th>
+                  <th>Nombre Fantasia</th>
                   <th>Telefono</th>
                   <th>Email</th>
                   <th>Provincia</th>
@@ -169,12 +167,12 @@
                 </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="clientsTableBody">
 
-                <?php
-                    $controller = new Controller();
-                    $controller->mostrarClientesController();
-                ?>
+                    <?php 
+                        $controller = new Controller;
+                        $controller->getClientsController();
+                    ?>
 
                 </tbody>
 
@@ -212,9 +210,4 @@
 
 <?php
     include ("views/dashboard/modules/footer.php");
-?>
-
-<?php
-    $controller = new Controller();
-    $controller->crearNuevoClienteController();
 ?>
