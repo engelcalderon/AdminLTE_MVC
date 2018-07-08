@@ -16,6 +16,9 @@ class Routes {
                 case "dashboard/clientes":
                 $module = "views/dashboard/pages/clientes.php";
                 break;
+                case "dashboard/productos":
+                $module = "views/dashboard/pages/productos.php";
+                break;
                 default:
                 $module = "views/public/pages/login.php";
             }

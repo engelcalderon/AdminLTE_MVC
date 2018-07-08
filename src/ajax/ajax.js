@@ -201,3 +201,10 @@ $("#nuevoClientForm").submit(function(e) {
         }
     });
 });
+
+$("#nuevoProductoForm").submit(function(e) {
+    e.preventDefault();
+
+    console.log("work")
+
+});

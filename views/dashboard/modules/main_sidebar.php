@@ -48,6 +48,17 @@
             <li><a href="<?php echo URL; ?>dashboard/clientes"><i class="fa fa-circle-o"></i>Clientes</a></li>
           </ul>
         </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-truck"></i> <span>Articulos</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo URL; ?>dashboard/productos"><i class="fa fa-circle-o"></i>Productos</a></li>
+          </ul>
+        </li>
         <!-- <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
