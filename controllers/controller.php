@@ -72,7 +72,7 @@ class Controller {
                 return;
             }
         }
-        echo $response;
+        echo json_encode($response);
     }
     
     public function getClientsController() {
@@ -100,6 +100,22 @@ class Controller {
         else {
             echo $client["message"];
         }
+    }
+
+    public function addProductController($data) {
+        $response = Datos::addProductModel($data);
+
+        if ($response["status"] == "success") {
+            $product = Datos::getProductModel($data["codigo"]);
+            if ($product["status"] == "success") {
+                echo json_encode(array(
+                    "status" => "success",
+                    "product" => $product["data"]
+                ));
+                return;
+            }
+        }
+        echo json_encode($response);
     }
 
 }

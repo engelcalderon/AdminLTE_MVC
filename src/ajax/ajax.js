@@ -205,6 +205,54 @@ $("#nuevoClientForm").submit(function(e) {
 $("#nuevoProductoForm").submit(function(e) {
     e.preventDefault();
 
-    console.log("work")
+    $.ajax({
+        type: 'POST',
+        url: '../ajax/productsAjax.php',
+        data: {
+            codigo: $("#nuevoProducto_codigo").val(),
+            nombre: $("#nuevoProducto_nombre").val(),
+            cantidad: $("#nuevoProducto_cantidad").val(),
+            impuesto: $("#nuevoProducto_impuesto").val(),
+            precio_compra: $("#nuevoProducto_precioCompra").val(),
+            precio_venta: $("#nuevoProducto_precioVenta").val()
+        },
+        beforeSend: function(response) {
+            $("#buttonAgregarProductoSaveChanges").text("Guardando...");
+        },
+        success: function(response) {
+            response = JSON.parse(response)
+            
+            var html = ''
+
+            if (response.status == 'success') {
+                html += `
+                    <tr>
+                        <td>`+response.product["codigo"]+`</td>
+                        <td>`+response.product["nombre"]+`</td>
+                        <td>`+response.product["cantidad_existente"]+`</td>
+                        <td>`+response.product["impuesto_venta"]+`</td>
+                        <td>`+response.product["precio_compra"]+`</td>
+                        <td>`+response.product["precio_venta"]+`</td>
+                    </tr>              
+                `;
+                $("#modal-default").modal('hide');
+                $("#productosTableBody").append(html);
+            }
+            else {
+                console.log(response)
+            }
+            $("#buttonAgregarProductoSaveChanges").text("Guardar cambios");
+            $("#nuevoProducto_codigo").val('')
+            $("#nuevoProducto_nombre").val('')
+            $("#nuevoProducto_cantidad").val('')
+            $("#nuevoProducto_impuesto").val('')
+            $("#nuevoProducto_precioCompra").val('')
+            $("#nuevoProducto_precioVenta").val('')
+        },
+        error: function(error) {
+            $("#buttonAgregarProductoSaveChanges").text("Guardar cambios");
+            alert(response);
+        }
+    });
 
 });

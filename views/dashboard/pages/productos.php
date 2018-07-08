@@ -57,6 +57,13 @@
                             </div>
                         </div>
 
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">Cantidad</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Cantiddad Existente" id="nuevoProducto_cantidad">
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Impuesto</label>
                             <div class="col-sm-10">
@@ -102,6 +109,7 @@
                 <tr>
                   <th>Codigo</th>
                   <th>Nombre</th>
+                  <th>Cantidad</th>
                   <th>Impuesto</th>
                   <th>Precio Compra</th>
                   <th>Precio Venta</th>
@@ -116,22 +124,6 @@
                     ?>
 
                 </tbody>
-
-                <!-- <tfoot>
-                <tr>
-                  <th>Identificacion</th>
-                  <th>Tipo de identificacion</th>
-                  <th>Nombre completo</th>
-                  <th>Nombre fantasia</th>
-                  <th>Telefono</th>
-                  <th>Email</th>
-                  <th>Provincia</th>
-                  <th>Canton</th>
-                  <th>Distrito</th>
-                  <th>Barrio</th>
-                  <th>Otras señas</th>
-                </tr>
-                </tfoot> -->
 
               </table>
 

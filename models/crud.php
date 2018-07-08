@@ -123,6 +123,67 @@
               "message" => $e->getMessage()
           );
       }
-  }
+    }
+
+     #Agregar un nuevo producto
+  	#-------------------------------------
+    static public function addProductModel($data) {
+        try {
+            $stmt = Conexion::conectar()->prepare("INSERT INTO producto(codigo, nombre, cantidad_existente, impuesto_venta, precio_compra, precio_venta) 
+                VALUES (:codigo, :nombre, :cantidad, :impuesto, :precio_compra, :precio_venta)");
+        
+              $stmt -> bindParam(":codigo",$data["codigo"], PDO::PARAM_STR);
+              $stmt -> bindParam(":nombre",$data["nombre"], PDO::PARAM_STR);
+              $stmt -> bindParam(":cantidad",$data["cantidad"], PDO::PARAM_STR);
+              $stmt -> bindParam(":impuesto",$data["impuesto"], PDO::PARAM_STR);
+              $stmt -> bindParam(":precio_compra",$data["precio_compra"], PDO::PARAM_STR);
+              $stmt -> bindParam(":precio_venta",$data["precio_venta"], PDO::PARAM_STR);
+              
+              if ($stmt -> execute()) {
+                    return array(
+                        "status" => "success"
+                    );
+              }
+            
+              return array(
+                "status" => "error",
+                "message" => "Unknown"
+            );
+        }
+        catch (PDOExecption $e) {
+            return array(
+                "status" => "error",
+                "message" => $e->getMessage()
+            );
+          }
+    }
+
+    #Obtener datos de un producto
+  	#-------------------------------------
+      static public function getProductModel($codigo) {
+        try {
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM producto WHERE codigo = :codigo");
+            $stmt->bindParam(":codigo",$codigo,PDO::PARAM_STR);
+  
+            if ($stmt->execute()) {
+                return array(
+                    "status"=> "success",
+                    "data" => $stmt->fetch()
+                );
+            }
+  
+            return array(
+                "status" => "error",
+                "message" => "Unknown"
+            );
+            
+        }
+        catch (PDOExecption $e) {
+            return array(
+                "status" => "error",
+                "message" => $e->getMessage()
+            );
+        }
+      }
 
   }
