@@ -120,7 +120,7 @@
 
                     <?php 
                         $controller = new Controller;
-                        // $controller->getClientsController();
+                        $controller->getProductsController();
                     ?>
 
                 </tbody>

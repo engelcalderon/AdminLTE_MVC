@@ -186,4 +186,31 @@
         }
       }
 
+    #Obtener todos los productos
+  	#-------------------------------------
+      static public function getProductsModel() {
+        try {
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM producto");
+
+          if ($stmt->execute()) {
+              return array(
+                  "status"=> "success",
+                  "data" => $stmt->fetchAll()
+              );
+          }
+
+          return array(
+              "status" => "error",
+              "message" => "Unknown"
+          );
+          
+      }
+      catch (PDOExecption $e) {
+          return array(
+              "status" => "error",
+              "message" => $e->getMessage()
+          );
+      }
+    }
+
   }

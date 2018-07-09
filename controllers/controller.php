@@ -118,6 +118,28 @@ class Controller {
         echo json_encode($response);
     }
 
+    public function getProductsController() {
+        $products = Datos::getProductsModel();
+
+        if ($products["status"] == "success") {
+            foreach($products["data"] as $key => $value) {
+                echo "
+                    <tr>
+                        <td>".$value["codigo"]."</td>
+                        <td>".$value["nombre"]."</td>
+                        <td>".$value["cantidad_existente"]."</td>
+                        <td>".$value["impuesto_venta"]."</td>
+                        <td>".$value["precio_compra"]."</td>
+                        <td>".$value["precio_venta"]."</td>
+                    </tr>
+                ";
+            }
+        }
+        else {
+            echo $products["message"];
+        }
+    }
+
 }
 
 ?>
