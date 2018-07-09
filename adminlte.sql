@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 26-06-2018 a las 18:53:25
--- Versión del servidor: 10.1.32-MariaDB
--- Versión de PHP: 7.2.5
+-- Host: 127.0.0.1
+-- Generation Time: Jul 09, 2018 at 10:21 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `adminlte`
+-- Database: `adminlte`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `client`
+-- Table structure for table `client`
 --
 
 CREATE TABLE `client` (
@@ -44,7 +44,7 @@ CREATE TABLE `client` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `client`
+-- Dumping data for table `client`
 --
 
 INSERT INTO `client` (`id`, `identificacion`, `tipoID`, `nombre`, `nombre_fantasia`, `telefono`, `email`, `provincia`, `canton`, `distrito`, `barrio`, `direccion`) VALUES
@@ -53,7 +53,31 @@ INSERT INTO `client` (`id`, `identificacion`, `tipoID`, `nombre`, `nombre_fantas
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `users`
+-- Table structure for table `producto`
+--
+
+CREATE TABLE `producto` (
+  `id` int(11) NOT NULL,
+  `codigo` varchar(50) DEFAULT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `precio_compra` varchar(20) DEFAULT NULL,
+  `precio_venta` varchar(20) DEFAULT NULL,
+  `impuesto_venta` varchar(20) DEFAULT NULL,
+  `cantidad_existente` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `producto`
+--
+
+INSERT INTO `producto` (`id`, `codigo`, `nombre`, `precio_compra`, `precio_venta`, `impuesto_venta`, `cantidad_existente`) VALUES
+(6, '9878', 'Producto prueba', '15700', '20900', '13', 89),
+(7, '7889', 'Producto dos prueba', '7899', '9000', '15', 43);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -64,18 +88,18 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
 (1, 'Frederick Calderon', 'frederick.calderon@ulatina.net', '/^xyN6KaoV6f6');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `client`
+-- Indexes for table `client`
 --
 ALTER TABLE `client`
   ADD PRIMARY KEY (`id`),
@@ -84,24 +108,37 @@ ALTER TABLE `client`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indices de la tabla `users`
+-- Indexes for table `producto`
+--
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `codigo` (`codigo`);
+
+--
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `client`
+-- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT de la tabla `users`
+-- AUTO_INCREMENT for table `producto`
+--
+ALTER TABLE `producto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
