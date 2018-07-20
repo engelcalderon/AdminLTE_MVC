@@ -113,6 +113,7 @@
                   <th>Impuesto</th>
                   <th>Precio Compra</th>
                   <th>Precio Venta</th>
+                  <th>Acciones</th>
                 </tr>
                 </thead>
 

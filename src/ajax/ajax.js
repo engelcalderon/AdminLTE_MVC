@@ -256,3 +256,8 @@ $("#nuevoProductoForm").submit(function(e) {
     });
 
 });
+
+$("[id='buttonEditarProducto']").click(function() {
+    var product = $(this).closest("tr").find(".Codigo");
+    console.log(product)
+})

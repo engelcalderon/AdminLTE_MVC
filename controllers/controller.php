@@ -131,6 +131,11 @@ class Controller {
                         <td>".$value["impuesto_venta"]."</td>
                         <td>".$value["precio_compra"]."</td>
                         <td>".$value["precio_venta"]."</td>
+                        <td>
+                            <button class='btn btn-default btn-sm' data-toggle='modal' data-target='#modal-default' id='buttonEditarProducto'>
+                                <i class='fa fa-edit'></i></button>
+                            <button class='btn btn-default btn-sm'><i class='fa fa-trash-o'></i></button>
+                        </td>
                     </tr>
                 ";
             }
