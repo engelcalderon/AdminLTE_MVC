@@ -96,7 +96,7 @@ class Controller {
                         <td>
                             <button class='btn btn-default btn-sm' onClick='buttonEditarCliente(".$value["id"].");'>
                                 <i class='fa fa-edit'></i></button>
-                            <button class='btn btn-default btn-sm'><i class='fa fa-trash-o'></i></button>
+                            <button class='btn btn-default btn-sm' onClick='buttonEliminarCliente(".$value["id"].")'><i class='fa fa-trash-o'></i></button>
                         </td>
                     </tr>
                 ";
@@ -133,6 +133,18 @@ class Controller {
                 ));
                 return;
             }
+        }
+        echo json_encode($response);
+    }
+
+    public function eliminarClienteController($idCliente) {
+        $response = Datos::eliminarClienteModel($idCliente);
+                
+        if ($response["status"] == "success") {
+            echo json_encode(array(
+                "status" => "success"
+            ));
+            return;
         }
         echo json_encode($response);
     }

@@ -138,6 +138,7 @@ $("#nuevoClientForm").submit(function(e) {
         type: 'POST',
         url: "../ajax/clientsAjax.php",
         data: {
+            nuevo: true,
             tipoID: $("#registroCliente_tipoID option:selected").text(),
             ID: $("#registroCliente_identificacion").val(),
             nombre: $("#registroCliente_nombre").val(),
@@ -172,6 +173,11 @@ $("#nuevoClientForm").submit(function(e) {
                     <td>`+response.client["distrito"]+`</td>
                     <td>`+response.client["barrio"]+`</td>
                     <td>`+response.client["direccion"]+`</td>
+                    <td>
+                            <button class='btn btn-default btn-sm' onClick='buttonEditarCliente(`+response.client["id"]+`);'>
+                                <i class='fa fa-edit'></i></button>
+                            <button class='btn btn-default btn-sm' onClick='buttonEliminarCliente(`+response.client["id"]+`)'><i class='fa fa-trash-o'></i></button>
+                        </td>
                 </tr>
                 `;
                 $("#modal-default").modal('hide');
@@ -212,6 +218,7 @@ function buttonEditarCliente(id) {
         type: 'POST',
         url: '../ajax/clientsAjax.php',
         data: {
+            mostrarEditar: true,
             idCliente: idClienteEditar
         },
         beforeSend: function(response) {
@@ -307,6 +314,40 @@ $("#editarClienteForm").submit(function(e) {
         }
     });
 });
+
+idClienteEliminar = -1;
+function buttonEliminarCliente(id) {
+    idClienteEliminar = id;
+
+    if (confirm("Desea eliminar este cliente?")) {
+        $.ajax({
+            type: 'POST',
+            url: '../ajax/clientsAjax.php',
+            data: {
+                eliminar: true,
+                id: idClienteEliminar,
+            },
+            beforeSend: function(response) {
+            },
+            success: function(response) {
+                response = JSON.parse(response)
+            
+                if (response.status == 'success') {
+                    setTimeout(function() {window.location.reload();}, 500);
+                }
+                else {
+                    console.log(response)
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+    else {
+
+    }
+}
 
 $("#nuevoProductoForm").submit(function(e) {
     e.preventDefault();

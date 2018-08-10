@@ -108,6 +108,31 @@
           );
         }
       }
+    
+    static public function eliminarClienteModel($idCliente) {
+        try {
+            $stmt = Conexion::conectar()->prepare("delete from client where id = :id");
+            
+                $stmt -> bindParam(":id",$idCliente, PDO::PARAM_INT);
+              
+              if ($stmt -> execute()) {
+                    return array(
+                        "status" => "success"
+                    );
+              }
+            
+              return array(
+                "status" => "error",
+                "message" => "Unknown"
+            );
+        }
+        catch (PDOExecption $e) {
+            return array(
+                "status" => "error",
+                "message" => $e->getMessage()
+            );
+          }
+    }
   
 
     #Obtener datos de todos los clientes

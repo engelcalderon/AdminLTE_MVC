@@ -4,7 +4,7 @@ include_once "../controllers/controller.php";
 include_once "../models/crud.php";
 
 // Nuevo cliente
-if( !isset($_POST["editar"]) && isset($_POST["tipoID"]) && isset($_POST["ID"]) && isset($_POST["nombre"]) 
+if( isset($_POST["nuevo"]) && isset($_POST["tipoID"]) && isset($_POST["ID"]) && isset($_POST["nombre"]) 
             && isset($_POST["nfantasia"]) && isset($_POST["telefono"]) && isset($_POST["email"]) && isset($_POST["provincia"])
             && isset($_POST["canton"]) && isset($_POST["distrito"]) && isset($_POST["barrio"]) && isset($_POST["direccion"])){
 
@@ -26,7 +26,7 @@ if( !isset($_POST["editar"]) && isset($_POST["tipoID"]) && isset($_POST["ID"]) &
             }
 
 // Mostrar datos editar
-if (isset($_POST["idCliente"])) {
+if (isset($_POST["mostrarEditar"]) && isset($_POST["idCliente"])) {
     $idCliente = $_POST["idCliente"];
 
     $controller = new Controller();
@@ -54,5 +54,13 @@ if( isset($_POST["editar"]) && isset($_POST["id_cliente"]) && isset($_POST["tipo
                 $controller = new Controller;
                 $controller->editarClienteController($data);
             }
+
+// Eliminar
+if (isset($_POST['eliminar']) && isset($_POST['id'])) {
+    $idCliente = $_POST["id"];
+
+    $controller = new Controller();
+    $controller->eliminarClienteController($idCliente);
+}
 
 ?>
