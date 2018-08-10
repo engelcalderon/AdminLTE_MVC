@@ -202,6 +202,112 @@ $("#nuevoClientForm").submit(function(e) {
     });
 });
 
+var idClienteEditar = -1;
+function buttonEditarCliente(id) {
+    idClienteEditar = id;
+
+    $("#modal-editarCliente").modal('show');
+
+    $.ajax({
+        type: 'POST',
+        url: '../ajax/clientsAjax.php',
+        data: {
+            idCliente: idClienteEditar
+        },
+        beforeSend: function(response) {
+        },
+        success: function(response) {
+           response = JSON.parse(response)
+            // console.log(response);
+        //    console.log($('#editarCliente_tipoID').find('option[text=Física]').val());
+            $('#editarCliente_identificacion').val(response.data.identificacion);
+            $('#editarCliente_nombre').val(response.data.nombre);
+            $('#editarCliente_nombrefantasia').val(response.data.nombre_fantasia);
+            $('#editarCliente_telefono').val(response.data.telefono);
+            $('#editarCliente_email').val(response.data.email);
+            // $('#editarCliente_provincia').val(response.data.identificacion);
+            // $('#editarCliente_canton').val(response.data.identificacion);
+            // $('#editarCliente_distrito').val(response.data.identificacion);
+            $('#editarCliente_barrio').val(response.data.barrio);
+            $('#editarCliente_direccion').val(response.data.direccion);
+        },
+        error: function(error) {
+           
+        }
+    })
+}
+
+$("#editarClienteForm").submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: "../ajax/clientsAjax.php",
+        data: {
+            editar: true,
+            id_cliente: idClienteEditar,
+            tipoID: $("#editaroCliente_tipoID option:selected").text(),
+            ID: $("#editarCliente_identificacion").val(),
+            nombre: $("#editarCliente_nombre").val(),
+            nfantasia: $("#editarCliente_nombrefantasia").val(),
+            telefono: $("#editarCliente_telefono").val(),
+            email: $("#editarCliente_email").val(),
+            provincia:$("#editarCliente_provincia option:selected").text(),
+            canton: $("#editarCliente_canton option:selected").text(),
+            distrito: $("#editarCliente_distrito option:selected").text(),
+            barrio: $("#editarCliente_barrio").val(),
+            direccion: $("#editarCliente_direccion").val(),
+        },
+        beforeSend: function(response) {
+            $("#botonGuardarCambiosEditarCliente").text("Guardando...");
+        },
+        success: function(response) {
+            // response = JSON.parse(response);
+            console.log(response);
+            var html = "";
+
+            if (response.status == "success") {
+                // html += `
+                // <tr>
+                //     <td>`+response.client["identificacion"]+`</td>
+                //     <td>`+response.client["tipoID"]+`</td>
+                //     <td>`+response.client["nombre"]+`</td>
+                //     <td>`+response.client["nombre_fantasia"]+`</td>
+                //     <td>`+response.client["telefono"]+`</td>
+                //     <td>`+response.client["email"]+`</td>
+                //     <td>`+response.client["provincia"]+`</td>
+                //     <td>`+response.client["canton"]+`</td>
+                //     <td>`+response.client["distrito"]+`</td>
+                //     <td>`+response.client["barrio"]+`</td>
+                //     <td>`+response.client["direccion"]+`</td>
+                // </tr>
+                // `;
+                console.log(response);
+                $("#modal-editarCliente").modal('hide');
+                $("#clientsTableBody").append(html);
+            }
+            else if (response.status == "error") {
+                console.log(response);
+            }
+            $("#botonGuardarCambiosEditarCliente").text("Guardar cambios");
+            $("#editaroCliente_tipoID").val(0);
+            $("#editarCliente_identificacion").val("")
+            $("#editarCliente_nombre").val("")
+            $("#editarCliente_nombrefantasia").val("")
+            $("#editarCliente_telefono").val("")
+            $("#editarCliente_email").val("")
+            $("#editarCliente_provincia").val(0)
+            $("#editarCliente_canton").val(0)
+            $("#editarCliente_distrito").val(0)
+            $("#editarCliente_barrio").val("")
+            $("#editarCliente_direccion").val("")
+        },
+        error: function(response) {
+            $("#botonGuardarCambiosEditarCliente").text("Guardar cambios");
+            alert(response);
+        }
+    });
+});
+
 $("#nuevoProductoForm").submit(function(e) {
     e.preventDefault();
 
@@ -209,6 +315,7 @@ $("#nuevoProductoForm").submit(function(e) {
         type: 'POST',
         url: '../ajax/productsAjax.php',
         data: {
+            nuevo: true,
             codigo: $("#nuevoProducto_codigo").val(),
             nombre: $("#nuevoProducto_nombre").val(),
             cantidad: $("#nuevoProducto_cantidad").val(),
@@ -233,6 +340,11 @@ $("#nuevoProductoForm").submit(function(e) {
                         <td>`+response.product["impuesto_venta"]+`</td>
                         <td>`+response.product["precio_compra"]+`</td>
                         <td>`+response.product["precio_venta"]+`</td>
+                        <td>
+                            <button class='btn btn-default btn-sm' id='buttonEditarProducto' onClick='buttonEditarProducto(`+response.product["id"]+`)'>
+                                <i class='fa fa-edit'></i></button>
+                            <button class='btn btn-default btn-sm' onClick='buttonEliminarProducto(`+response.product["id"]+`)'><i class='fa fa-trash-o'></i></button>
+                        </td>
                     </tr>              
                 `;
                 $("#modal-default").modal('hide');
@@ -257,7 +369,3 @@ $("#nuevoProductoForm").submit(function(e) {
 
 });
 
-$("[id='buttonEditarProducto']").click(function() {
-    var product = $(this).closest("tr").find(".Codigo");
-    console.log(product)
-})

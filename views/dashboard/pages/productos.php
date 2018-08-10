@@ -101,6 +101,78 @@
                 <!-- /.modal-dialog -->
             </div>
             <!-- /.modal -->
+
+            <div class="modal fade" id="modal-editarProducto">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Editar producto</h4>
+                    </div>
+
+                    <form class="form-horizontal" method="post" id="editarProductoForm">
+                    
+                        <div class="modal-body">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Codigo</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Codigo de Producto" id="editarProducto_codigo">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Nombre</label>
+                            <div class="col-sm-10">
+                            <textarea class="form-control" rows="2" id="editarProducto_nombre" placeholder="Nombre del Producto"></textarea>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label class="col-sm-2 control-label">Cantidad</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Cantiddad Existente" id="editarProducto_cantidad">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Impuesto</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="%" id="editarProducto_impuesto">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Precio Compra</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="₡" id="editarProducto_precioCompra">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Precio Venta</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="₡" id="editarProducto_precioVenta">
+                            </div>
+                        </div>
+
+   
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" id="editarProductoGuardar" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                    
+                    </form>
+                
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
             
             <!-- /.box-header -->
             <div class="box-body">

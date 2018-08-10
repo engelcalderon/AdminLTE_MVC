@@ -25,6 +25,12 @@ class Routes {
                 case "dashboard/emailfree":
                 $module = "views/dashboard/pages/emailfree.php";
                 break;
+                case "dashboard/facturar":
+                $module = "views/dashboard/pages/invoice.php";
+                break;
+                case "dashboard/archivos":
+                $module = "views/dashboard/pages/archivos.php";
+                break;
                 default:
                 $module = "views/public/pages/login.php";
             }

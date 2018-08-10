@@ -150,6 +150,127 @@
             </div>
             <!-- /.modal -->
             
+
+            <div class="modal fade" id="modal-editarCliente">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Editar cliente</h4>
+                    </div>
+
+                    <form method="post" id="editarClienteForm">
+                    
+                        <div class="modal-body">
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label>Tipo</label>
+                                            <select class="form-control select2" style="width: 100%;" id="editarCliente_tipoID">
+                                                <option value="0" selected="selected">Seleccione una opción</option>
+                                                <option value="1">Físca</option>
+                                                <option value="2">Jurídica</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-9">
+                                            <label>Identificacion</label>
+                                            <input type="text" class="form-control" id="editarCliente_identificacion" placeholder="1-11 ...">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <label>Nombre completo</label>
+                                            <input type="text" class="form-control" id="editarCliente_nombre" placeholder="Nombre ...">
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <label>Nombre fantasia</label>
+                                            <input type="text" class="form-control" id="editarCliente_nombrefantasia" placeholder="Fantasia ...">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <label>Telefono</label>
+                                            <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-phone"></i>
+                                            </div>
+                                                <input type="text" class="form-control" id="editarCliente_telefono" data-inputmask='"mask": "(999) 9999-9999"' data-mask>
+                                            </div>   
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <label>Email</label>
+                                            <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-envelope"></i>
+                                            </div>
+                                                <input type="text" class="form-control" id="editarCliente_email" placeholder="Email ...">
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <label>Provincia</label>
+                                            <select class="form-control select2" style="width: 100%;" id="editarCliente_provincia" onChange="getCantones(this.value)">
+                                                <option value="0" selected="selected">Seleccione una opción</option>      
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <label>Canton</label>
+                                            <select class="form-control select2" style="width: 100%;" id="editarCliente_canton" onChange="getDistritos(this.value)">
+                                                <option value="0" selected="selected">Seleccione una opción</option>
+                                                <section "mostrarCantones"></section>                                
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <label>Distrito</label>
+                                            <select class="form-control select2" style="width: 100%;" id="editarCliente_distrito">
+                                                <option value="0" selected="selected">Seleccione una opción</option>      
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <label>Barrio</label>
+                                            <input type="text" class="form-control" id="editarCliente_barrio" placeholder="Barrio ...">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <label>Otras señas</label>
+                                            <textarea class="form-control" rows="1" id="editarCliente_direccion" placeholder="Direccion ..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" id="botonGuardarCambiosEditarCliente" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                    
+                    </form>
+                
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
@@ -166,6 +287,7 @@
                   <th>Distrito</th>
                   <th>Barrio</th>
                   <th>Otras señas</th>
+                  <th>Acciones</th>
                 </tr>
                 </thead>
 

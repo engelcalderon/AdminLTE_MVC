@@ -235,9 +235,11 @@
 <script src="<?php echo URL; ?>src/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo URL; ?>src/dist/js/demo.js"></script>
-
+<!-- Jasny Boostrap -->
+<script src="<?php echo URL; ?>src/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
 <!-- Ajax to login -->
 <script src="<?php echo URL; ?>src/ajax/ajax.js"></script>
-
+<script src="<?php echo URL; ?>src/ajax/productos.js"></script>
+<script src="<?php echo URL; ?>src/ajax/uploadAjax.js"></script>
 </body>
 </html>

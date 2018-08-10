@@ -93,6 +93,11 @@ class Controller {
                         <td>".$value["distrito"]."</td>
                         <td>".$value["barrio"]."</td>
                         <td>".$value["direccion"]."</td>
+                        <td>
+                            <button class='btn btn-default btn-sm' onClick='buttonEditarCliente(".$value["id"].");'>
+                                <i class='fa fa-edit'></i></button>
+                            <button class='btn btn-default btn-sm'><i class='fa fa-trash-o'></i></button>
+                        </td>
                     </tr>
                 ";
             }
@@ -100,6 +105,36 @@ class Controller {
         else {
             echo $client["message"];
         }
+    }
+
+    public function mostrarDatosEditarClienteController($idCliente) {
+        $response = Datos::getClientModel($idCliente);
+
+        if ($response["status"] == "success") {
+            echo json_encode(array(
+                "status"=>"sucess",
+                "data"=>$response["data"]
+            ));
+        }
+        else {
+            echo json_encode($response);
+        }
+    }
+
+    public function editarClienteController($data) {
+        $response = Datos::editarClienteModel($data);
+                
+        if ($response["status"] == "success") {
+            $client = Datos::getClientModel($data["ID"]);
+            if ($client["status"] == "success") {
+                echo json_encode(array(
+                    "status" => "success",
+                    "client" => $client["data"]
+                ));
+                return;
+            }
+        }
+        echo json_encode($response);
     }
 
     public function addProductController($data) {
@@ -118,6 +153,30 @@ class Controller {
         echo json_encode($response);
     }
 
+    public function editarProductoController($data) {
+        $response = Datos::editarProductoModel($data);
+                
+        if ($response["status"] == "success") {
+            echo json_encode(array(
+                "status" => "success"
+            ));
+            return;
+        }
+        echo json_encode($response);
+    }
+
+    public function eliminarProductoController($idProducto) {
+        $response = Datos::eliminarProductoModel($idProducto);
+                
+        if ($response["status"] == "success") {
+            echo json_encode(array(
+                "status" => "success"
+            ));
+            return;
+        }
+        echo json_encode($response);
+    }
+
     public function getProductsController() {
         $products = Datos::getProductsModel();
 
@@ -132,9 +191,9 @@ class Controller {
                         <td>".$value["precio_compra"]."</td>
                         <td>".$value["precio_venta"]."</td>
                         <td>
-                            <button class='btn btn-default btn-sm' data-toggle='modal' data-target='#modal-default' id='buttonEditarProducto'>
+                            <button class='btn btn-default btn-sm' id='buttonEditarProducto' onClick='buttonEditarProducto(".$value["id"].")'>
                                 <i class='fa fa-edit'></i></button>
-                            <button class='btn btn-default btn-sm'><i class='fa fa-trash-o'></i></button>
+                            <button class='btn btn-default btn-sm' onClick='buttonEliminarProducto(".$value["id"].")'><i class='fa fa-trash-o'></i></button>
                         </td>
                     </tr>
                 ";
@@ -143,6 +202,34 @@ class Controller {
         else {
             echo $products["message"];
         }
+    }
+
+    public function mostrarDatosEditarProductoController($idProducto) {
+        $response = Datos::getProductoModelByID($idProducto);
+
+        if ($response["status"] == "success") {
+            echo json_encode(array(
+                "status"=>"sucess",
+                "data"=>$response["data"]
+            ));
+        }
+        else {
+            echo json_encode($response);
+        }
+    }
+
+    public function guardarArchivoController($nombre, $directorio) {
+        $data = array(
+            "nombre"=>$nombre,
+            "directorio"=>$directorio
+        );
+        $response = Datos::guardarArchivoModel($data);
+
+        if ($response["status"] == "success") {
+                echo $nombre;
+                return;
+        }
+        echo json_encode($response);
     }
 
 }
