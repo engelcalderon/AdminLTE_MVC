@@ -1,29 +1,3 @@
-<?php
-    include "views/dashboard/modules/header.php";
-?>
-
- <!-- Content Wrapper. Contains page content -->
- <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <h1>
-        Facturar
-        <small>#007612</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <!-- <li><a href="#">Facturar</a></li> -->
-        <li class="active">Facturar</li>
-      </ol>
-    </div>
-
-    <div class="pad margin no-print">
-      <div class="callout callout-info" style="margin-bottom: 0!important;">
-        <h4><i class="fa fa-info"></i> Note:</h4>
-        This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
-      </div>
-    </div>
-
     <!-- Main content -->
     <div class="invoice">
       <!-- title row -->
@@ -112,7 +86,7 @@
               <td>422-568-642</td>
               <td>Tousled lomo letterpress</td>
               <td>$25.99</td>
-            </tr>
+            </tr> 
             </tbody>
           </table>
         </div>
@@ -163,23 +137,4 @@
       </div>
       <!-- /.row -->
 
-      <!-- this row will not appear when printing -->
-      <div class="row no-print">
-        <div class="col-xs-12">
-          <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-          <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
-          </button>
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class="fa fa-download"></i> Generate PDF
-          </button>
-        </div>
-      </div>
     </div>
-    <!-- /.content -->
-    <div class="clearfix"></div>
-  </div>
-  <!-- /.content-wrapper -->
-
-<?php
-    include ("views/dashboard/modules/footer.php");
-?>

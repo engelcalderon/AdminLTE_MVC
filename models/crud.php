@@ -190,6 +190,34 @@
       }
     }
 
+     #Obtener datos de un cliente por su numero de identificacion
+  	#-------------------------------------
+      static public function getClientModelByIdentification($identificacion) {
+        try {
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM client WHERE identificacion = :identificacion");
+            $stmt->bindParam(":identificacion",$identificacion,PDO::PARAM_STR);
+  
+            if ($stmt->execute()) {
+                return array(
+                    "status"=> "success",
+                    "data" => $stmt->fetch()
+                );
+            }
+  
+            return array(
+                "status" => "error",
+                "message" => "Unknown"
+            );
+            
+        }
+        catch (PDOExecption $e) {
+            return array(
+                "status" => "error",
+                "message" => $e->getMessage()
+            );
+        }
+      }
+
      #Agregar un nuevo producto
   	#-------------------------------------
     static public function addProductModel($data) {

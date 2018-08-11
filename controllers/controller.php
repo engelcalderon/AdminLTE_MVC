@@ -63,7 +63,7 @@ class Controller {
         $response = Datos::createClientModel($data);
                 
         if ($response["status"] == "success") {
-            $client = Datos::getClientModel($data["ID"]);
+            $client = Datos::getClientModelByIdentification($data["ID"]);
             if ($client["status"] == "success") {
                 echo json_encode(array(
                     "status" => "success",
@@ -125,14 +125,10 @@ class Controller {
         $response = Datos::editarClienteModel($data);
                 
         if ($response["status"] == "success") {
-            $client = Datos::getClientModel($data["ID"]);
-            if ($client["status"] == "success") {
-                echo json_encode(array(
-                    "status" => "success",
-                    "client" => $client["data"]
-                ));
-                return;
-            }
+            echo json_encode(array(
+                "status" => "success",
+            ));
+            return;
         }
         echo json_encode($response);
     }

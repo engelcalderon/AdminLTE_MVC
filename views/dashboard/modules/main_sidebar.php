@@ -71,8 +71,18 @@
             <li><a href="<?php echo URL; ?>dashboard/emailfree"><i class="fa fa-circle-o"></i>FREE</a></li>
           </ul>
         </li>
-        <li><a href="<?php echo URL; ?>dashboard/facturar"><i class="fa fa-book"></i> <span>Facturar</span></a></li>
-        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-book"></i> <span>Facturacion</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo URL; ?>dashboard/crearfactura"><i class="fa fa-circle-o"></i>Crear nueva factura</a></li>
+            <li><a href="<?php echo URL; ?>dashboard/facturas"><i class="fa fa-circle-o"></i>Mostrar facturas</a></li>
+          </ul>
+        </li>
         <li><a href="<?php echo URL; ?>dashboard/archivos"><i class="fa fa-book"></i> <span>Archivos</span></a></li>
         <!-- <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>

@@ -25,8 +25,11 @@ class Routes {
                 case "dashboard/emailfree":
                 $module = "views/dashboard/pages/emailfree.php";
                 break;
-                case "dashboard/facturar":
-                $module = "views/dashboard/pages/invoice.php";
+                case "dashboard/crearfactura":
+                $module = "views/dashboard/pages/crearfactura.php";
+                break;
+                case "dashboard/facturas":
+                $module = "views/dashboard/pages/facturas.php";
                 break;
                 case "dashboard/archivos":
                 $module = "views/dashboard/pages/archivos.php";

@@ -9,7 +9,6 @@ use Spipu\Html2Pdf\Html2Pdf;
 use Spipu\Html2Pdf\Exception\Html2PdfException;
 use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 
-
         if (isset($_POST["generar"])) {
             try {
                 ob_start();
@@ -22,7 +21,7 @@ use Spipu\Html2Pdf\Exception\ExceptionFormatter;
           
                 $mipdf=new HTML2PDF('P','A4','es','true','UTF-8');
           
-                $mipdf->writeHTML('<h1>Work</h2>');
+                $mipdf->writeHTML($html);
           
                 $mipdf->Output('PdfGeneradoPHP.pdf');
           
