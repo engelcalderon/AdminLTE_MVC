@@ -170,7 +170,7 @@
                                             <label>Tipo</label>
                                             <select class="form-control select2" style="width: 100%;" id="editarCliente_tipoID">
                                                 <option value="0" selected="selected">Seleccione una opción</option>
-                                                <option value="1">Físca</option>
+                                                <option value="1">Física</option>
                                                 <option value="2">Jurídica</option>
                                             </select>
                                         </div>
@@ -221,13 +221,13 @@
                                     <div class="row">
                                         <div class="col-xs-4">
                                             <label>Provincia</label>
-                                            <select class="form-control select2" style="width: 100%;" id="editarCliente_provincia" onChange="getCantones(this.value)">
+                                            <select class="form-control select2" style="width: 100%;" id="editarCliente_provincia" onChange="getCantonesEditar(this.value)">
                                                 <option value="0" selected="selected">Seleccione una opción</option>      
                                             </select>
                                         </div>
                                         <div class="col-xs-4">
                                             <label>Canton</label>
-                                            <select class="form-control select2" style="width: 100%;" id="editarCliente_canton" onChange="getDistritos(this.value)">
+                                            <select class="form-control select2" style="width: 100%;" id="editarCliente_canton" onChange="getDistritosEditar(this.value)">
                                                 <option value="0" selected="selected">Seleccione una opción</option>
                                                 <section "mostrarCantones"></section>                                
                                             </select>

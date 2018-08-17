@@ -399,3 +399,46 @@ Stack trace:
 #7 E:\xampp\htdocs\AdminLTE_MVC\index.php(13): Controller->main()
 #8 {main}
   thrown in E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\tcpdf.php on line 2927
+[10-Aug-2018 18:43:16 America/Costa_Rica] PHP Notice:  ob_end_clean(): failed to delete buffer. No buffer to delete in E:\xampp\htdocs\AdminLTE_MVC\controllers\pdfController.php on line 20
+[10-Aug-2018 18:43:17 America/Costa_Rica] PHP Warning:  Cannot modify header information - headers already sent by (output started at E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\include\tcpdf_static.php:350) in E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\tcpdf.php on line 7630
+[10-Aug-2018 18:43:17 America/Costa_Rica] PHP Fatal error:  Uncaught Exception: TCPDF ERROR: Some data has already been output to browser, can't send PDF file in E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\tcpdf.php:2927
+Stack trace:
+#0 E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\tcpdf.php(7632): TCPDF->Error('Some data has a...')
+#1 E:\xampp\htdocs\AdminLTE_MVC\vendor\spipu\html2pdf\src\Html2Pdf.php(549): TCPDF->Output('PdfGeneradoPHP....', 'I')
+#2 E:\xampp\htdocs\AdminLTE_MVC\controllers\pdfController.php(26): Spipu\Html2Pdf\Html2Pdf->output('PdfGeneradoPHP....')
+#3 E:\xampp\htdocs\AdminLTE_MVC\views\dashboard\pages\crearfactura.php(3): require('E:\\xampp\\htdocs...')
+#4 E:\xampp\htdocs\AdminLTE_MVC\controllers\controller.php(13): include('E:\\xampp\\htdocs...')
+#5 E:\xampp\htdocs\AdminLTE_MVC\views\template.php(3): Controller->manageRoutes()
+#6 E:\xampp\htdocs\AdminLTE_MVC\controllers\controller.php(6): include('E:\\xampp\\htdocs...')
+#7 E:\xampp\htdocs\AdminLTE_MVC\index.php(13): Controller->main()
+#8 {main}
+  thrown in E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\tcpdf.php on line 2927
+[10-Aug-2018 18:43:39 America/Costa_Rica] PHP Notice:  ob_end_clean(): failed to delete buffer. No buffer to delete in E:\xampp\htdocs\AdminLTE_MVC\controllers\pdfController.php on line 20
+[10-Aug-2018 18:43:39 America/Costa_Rica] PHP Warning:  Cannot modify header information - headers already sent by (output started at E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\include\tcpdf_static.php:350) in E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\tcpdf.php on line 7630
+[10-Aug-2018 18:43:39 America/Costa_Rica] PHP Fatal error:  Uncaught Exception: TCPDF ERROR: Some data has already been output to browser, can't send PDF file in E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\tcpdf.php:2927
+Stack trace:
+#0 E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\tcpdf.php(7632): TCPDF->Error('Some data has a...')
+#1 E:\xampp\htdocs\AdminLTE_MVC\vendor\spipu\html2pdf\src\Html2Pdf.php(549): TCPDF->Output('PdfGeneradoPHP....', 'I')
+#2 E:\xampp\htdocs\AdminLTE_MVC\controllers\pdfController.php(26): Spipu\Html2Pdf\Html2Pdf->output('PdfGeneradoPHP....')
+#3 E:\xampp\htdocs\AdminLTE_MVC\views\dashboard\pages\crearfactura.php(3): require('E:\\xampp\\htdocs...')
+#4 E:\xampp\htdocs\AdminLTE_MVC\controllers\controller.php(13): include('E:\\xampp\\htdocs...')
+#5 E:\xampp\htdocs\AdminLTE_MVC\views\template.php(3): Controller->manageRoutes()
+#6 E:\xampp\htdocs\AdminLTE_MVC\controllers\controller.php(6): include('E:\\xampp\\htdocs...')
+#7 E:\xampp\htdocs\AdminLTE_MVC\index.php(13): Controller->main()
+#8 {main}
+  thrown in E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\tcpdf.php on line 2927
+[10-Aug-2018 18:44:22 America/Costa_Rica] PHP Notice:  Undefined variable: var in E:\xampp\htdocs\AdminLTE_MVC\views\dashboard\pages\invoice-print.php on line 7
+[10-Aug-2018 18:44:23 America/Costa_Rica] PHP Notice:  ob_end_clean(): failed to delete buffer. No buffer to delete in E:\xampp\htdocs\AdminLTE_MVC\controllers\pdfController.php on line 20
+[10-Aug-2018 18:44:23 America/Costa_Rica] PHP Warning:  Cannot modify header information - headers already sent by (output started at E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\include\tcpdf_static.php:350) in E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\tcpdf.php on line 7630
+[10-Aug-2018 18:44:23 America/Costa_Rica] PHP Fatal error:  Uncaught Exception: TCPDF ERROR: Some data has already been output to browser, can't send PDF file in E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\tcpdf.php:2927
+Stack trace:
+#0 E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\tcpdf.php(7632): TCPDF->Error('Some data has a...')
+#1 E:\xampp\htdocs\AdminLTE_MVC\vendor\spipu\html2pdf\src\Html2Pdf.php(549): TCPDF->Output('PdfGeneradoPHP....', 'I')
+#2 E:\xampp\htdocs\AdminLTE_MVC\controllers\pdfController.php(26): Spipu\Html2Pdf\Html2Pdf->output('PdfGeneradoPHP....')
+#3 E:\xampp\htdocs\AdminLTE_MVC\views\dashboard\pages\crearfactura.php(3): require('E:\\xampp\\htdocs...')
+#4 E:\xampp\htdocs\AdminLTE_MVC\controllers\controller.php(13): include('E:\\xampp\\htdocs...')
+#5 E:\xampp\htdocs\AdminLTE_MVC\views\template.php(3): Controller->manageRoutes()
+#6 E:\xampp\htdocs\AdminLTE_MVC\controllers\controller.php(6): include('E:\\xampp\\htdocs...')
+#7 E:\xampp\htdocs\AdminLTE_MVC\index.php(13): Controller->main()
+#8 {main}
+  thrown in E:\xampp\htdocs\AdminLTE_MVC\vendor\tecnickcom\tcpdf\tcpdf.php on line 2927

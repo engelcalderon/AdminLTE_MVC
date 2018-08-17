@@ -74,10 +74,10 @@
   	#-------------------------------------
       static public function editarClienteModel($data){
         try {
-          $stmt = Conexion::conectar()->prepare("update client set identificacion = :identification, tipoID = :tipo_identificacion, nombre = :nombre, nombre_fantasia = :nfantasia , 
+          $stmt = Conexion::conectar()->prepare("update client set identificacion = :identificacion, tipoID = :tipo_identificacion, nombre = :nombre, nombre_fantasia = :nfantasia , 
           telefono = :telefono, email = :email, provincia = :provincia, canton = :canton, distrito = :distrito, barrio = :barrio, direccion = :direccion where id = :id");
 
-            $stmt -> bindParam(":id",$data["id_cliente"], PDO::PARAM_INT);
+            $stmt -> bindParam(":id",$data["id_cliente"], PDO::PARAM_STR);
             $stmt -> bindParam(":identificacion",$data["ID"], PDO::PARAM_STR);
             $stmt -> bindParam(":tipo_identificacion",$data["tipoID"], PDO::PARAM_STR);
             $stmt -> bindParam(":nombre",$data["nombre"], PDO::PARAM_STR);

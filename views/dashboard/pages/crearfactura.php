@@ -16,13 +16,13 @@
         <li class="active">Crear nueva factura</li>
       </ol>
     </div>
-
+    <form method="POST">
     <!-- Main content -->
     <div class="invoice">
 
       <div class="form-group">
         <label>Codigo del producto</label>
-        <input type="text" class="form-control" placeholder="123 ...">
+        <input type="text" name="nombre" class="form-control" placeholder="123 ...">
       </div>
       <form method="post">
       <button type="submit" name="addProduct" class="btn btn-primary">Anadir producto</button>
@@ -65,7 +65,7 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <form method="POST">
+          <!-- <form method="POST"> -->
           <button type="submit" name="generar" class="btn btn-primary pull-right" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Guardar e imprimir
           </button>

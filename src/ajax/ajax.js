@@ -89,6 +89,22 @@ $("#buttonNuevoCliente").click(function(e) {
     }
 });
 
+function getProvincias(idappendhtml) {
+    $.ajax({
+        type: 'GET',
+        url: 'https://ubicaciones.paginasweb.cr/provincias.json',
+        dataType: 'json',
+        success: function(response) {
+            var html = "";
+            for(key in response) {
+                html += "<option value="+key+">" + response[key] + "</option>";
+            }
+            $("#"+idappendhtml+"").append(html);
+            isLoaded = true;
+        }
+    });
+}
+
 function getCantones(provinciaID) {
      $("#registroCliente_distrito").html('<option value="0" selected="selected">Seleccione una opción</option>');
 
@@ -208,12 +224,63 @@ $("#nuevoClientForm").submit(function(e) {
     });
 });
 
+function getCantonesEditar(provinciaID) {
+    $("#editarCliente_distrito").html('<option value="0" selected="selected">Seleccione una opción</option>');
+
+   if (provinciaID == 0)  {
+       $("#editarCliente_canton").html('<option value="0" selected="selected">Seleccione una opción</option>');
+       return;
+   }  
+   $.ajax({
+       type: 'GET',
+       url: 'https://ubicaciones.paginasweb.cr/provincia/'+provinciaID+'/cantones.json',
+       dataType: 'json',
+       success: function(response) {
+           var html = '<option value="0" selected="selected">Seleccione una opción</option>';
+           for(key in response) {
+               html += "<option value="+key+">" + response[key] + "</option>";
+           }
+           $("#editarCliente_canton").html(html);
+           $('#editarCliente_canton option:contains('+editarClienteCanton+')').attr('selected', true).change();
+       }
+   });
+   
+}
+
+function getDistritosEditar(cantonID) {
+   if (cantonID == 0)
+   {
+       $("#editarCliente_distrito").html('<option value="0" selected="selected">Seleccione una opción</option>');
+       return;
+   }
+   $.ajax({
+       type: 'GET',
+       url: 'https://ubicaciones.paginasweb.cr/provincia/1/canton/'+cantonID+'/distritos.json',
+       dataType: 'json',
+       success: function(response) {
+           var html = '<option value="0" selected="selected">Seleccione una opción</option>';
+           for(key in response) {
+               html += "<option value="+key+">" + response[key] + "</option>";
+           }
+           $("#editarCliente_distrito").html(html);
+           $('#editarCliente_distrito option:contains('+editarClienteDistrito+')').attr('selected', true);
+       }
+   });
+}
+
+var provinciasLoadedEditar = false;
+var editarClienteCanton = 0;
+var editarClienteDistrito = 0;
 var idClienteEditar = -1;
 function buttonEditarCliente(id) {
     idClienteEditar = id;
 
     $("#modal-editarCliente").modal('show');
-
+    if (provinciasLoadedEditar == false) {
+        getProvincias("editarCliente_provincia");
+        provinciasLoadedEditar = true;
+    }
+        
     $.ajax({
         type: 'POST',
         url: '../ajax/clientsAjax.php',
@@ -225,16 +292,16 @@ function buttonEditarCliente(id) {
         },
         success: function(response) {
            response = JSON.parse(response)
-            // console.log(response);
-        //    console.log($('#editarCliente_tipoID').find('option[text=Física]').val());
+            $('#editarCliente_tipoID option:contains('+response.data.tipoID+')').attr('selected', true).change();
             $('#editarCliente_identificacion').val(response.data.identificacion);
             $('#editarCliente_nombre').val(response.data.nombre);
             $('#editarCliente_nombrefantasia').val(response.data.nombre_fantasia);
             $('#editarCliente_telefono').val(response.data.telefono);
             $('#editarCliente_email').val(response.data.email);
-            // $('#editarCliente_provincia').val(response.data.identificacion);
-            // $('#editarCliente_canton').val(response.data.identificacion);
-            // $('#editarCliente_distrito').val(response.data.identificacion);
+
+            $('#editarCliente_provincia option:contains('+response.data.provincia+')').attr('selected', true).change();
+            editarClienteCanton = response.data.canton;
+            editarClienteDistrito = response.data.distrito;
             $('#editarCliente_barrio').val(response.data.barrio);
             $('#editarCliente_direccion').val(response.data.direccion);
         },
@@ -252,7 +319,7 @@ $("#editarClienteForm").submit(function(e) {
         data: {
             editar: true,
             id_cliente: idClienteEditar,
-            tipoID: $("#editaroCliente_tipoID option:selected").text(),
+            tipoID: $("#editarCliente_tipoID option:selected").text(),
             ID: $("#editarCliente_identificacion").val(),
             nombre: $("#editarCliente_nombre").val(),
             nfantasia: $("#editarCliente_nombrefantasia").val(),
@@ -268,31 +335,15 @@ $("#editarClienteForm").submit(function(e) {
             $("#botonGuardarCambiosEditarCliente").text("Guardando...");
         },
         success: function(response) {
-            // response = JSON.parse(response);
+            response = JSON.parse(response);
             console.log(response);
-            var html = "";
 
             if (response.status == "success") {
-                // html += `
-                // <tr>
-                //     <td>`+response.client["identificacion"]+`</td>
-                //     <td>`+response.client["tipoID"]+`</td>
-                //     <td>`+response.client["nombre"]+`</td>
-                //     <td>`+response.client["nombre_fantasia"]+`</td>
-                //     <td>`+response.client["telefono"]+`</td>
-                //     <td>`+response.client["email"]+`</td>
-                //     <td>`+response.client["provincia"]+`</td>
-                //     <td>`+response.client["canton"]+`</td>
-                //     <td>`+response.client["distrito"]+`</td>
-                //     <td>`+response.client["barrio"]+`</td>
-                //     <td>`+response.client["direccion"]+`</td>
-                // </tr>
-                // `;
-                console.log(response);
                 $("#modal-editarCliente").modal('hide');
-                $("#clientsTableBody").append(html);
+                setTimeout(function() {window.location.reload();}, 500);
             }
             else if (response.status == "error") {
+                alert(response);
                 console.log(response);
             }
             $("#botonGuardarCambiosEditarCliente").text("Guardar cambios");
