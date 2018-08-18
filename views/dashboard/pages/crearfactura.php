@@ -1,8 +1,10 @@
 <?php
     include "views/dashboard/modules/header.php";
-    require "controllers/pdfController.php";
+    // require "controllers/pdfController.php";
 ?>
 
+<form method="POST" id="crearFacturaForm"></form>
+<form method="post" id="addProductForm"></form>
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -16,45 +18,34 @@
         <li class="active">Crear nueva factura</li>
       </ol>
     </div>
-    <form method="POST">
+    
     <!-- Main content -->
     <div class="invoice">
 
+       <div class="form-group">
+        <label>Codigo del cliente</label>
+        <input type="text" id="nuevaFacturaCliente" class="form-control" placeholder="#">
+      </div>
+     
       <div class="form-group">
         <label>Codigo del producto</label>
-        <input type="text" name="nombre" class="form-control" placeholder="123 ...">
+        <input type="text" id="codProducto" class="form-control" placeholder="#">
       </div>
-      <form method="post">
-      <button type="submit" name="addProduct" class="btn btn-primary">Anadir producto</button>
-      </form>
+      <button type="submit" class="btn btn-primary" form="addProductForm">Anadir producto</button>
 
       <div class="box-body">
-      <table id="example2" class="table table-bordered table-hover">
+      <table id="nuevaFacturaTablaProductos" class="table table-bordered table-hover">
         <thead>
         <tr>
           <th>Cantidad</th>
           <th>Descripcion</th>
           <th>Codigo</th>
           <th>Subtotal</th>
+          <th>Acciones</th>
         </tr>
         </thead>
 
-        <tbody id="productosTableBody">
-
-            <?php
-                $arrayProductos = [];
-                array_push($arrayProductos, 123, 345);
-                foreach($arrayProductos as $producto) {
-                  echo "
-                  <tr>
-                    <td>".$producto."</td>
-                  </tr>
-                    ";
-                }
-                 
-                // $controller = new Controller;
-                // $controller->getProductsController();
-            ?>
+        <tbody id="nuevaFacturaCuerpoTablaProductos">
 
         </tbody>
 
@@ -66,10 +57,9 @@
       <div class="row no-print">
         <div class="col-xs-12">
           <!-- <form method="POST"> -->
-          <button type="submit" name="generar" class="btn btn-primary pull-right" style="margin-right: 5px;">
+          <button  class="btn btn-primary pull-right" onclick="guardarFactura()" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Guardar e imprimir
           </button>
-          </form>
         </div>
       </div>
     </div>

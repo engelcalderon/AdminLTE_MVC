@@ -423,4 +423,91 @@
           }
     }
 
+     #Crear factura y agregar productos
+  	#-------------------------------------
+    static public function crearFacturaModel($data) {
+        try {
+            $conexion = new PDO("mysql:host=localhost;dbname=adminlte","root","");
+            $stmt = $conexion->prepare("INSERT INTO factura(id_cliente) values (:cliente)");
+        
+            $stmt -> bindParam(":cliente",$data["cliente"], PDO::PARAM_STR);
+            
+            if ($stmt -> execute()) {
+
+                $id_factura =  $conexion->lastInsertId();
+
+                foreach($data["productos"] as $value) {
+                    $query = "INSERT INTO factura_producto (id_factura, id_producto, cantidad) VALUES
+                    (:id_factura, :id_producto, :cantidad)";
+                    $stmt = $conexion->prepare($query);
+                    $stmt -> bindParam(":id_factura",$id_factura, PDO::PARAM_STR);
+                    $stmt -> bindParam(":id_producto", $value["producto"], PDO::PARAM_STR);
+                    $stmt -> bindParam(":cantidad",$value["cantidad"], PDO::PARAM_STR);
+
+                    if (!$stmt -> execute()) {
+                        return array(
+                            "status" => "error",
+                            "message" => "Error al insertar productos"
+                        );
+                        break;
+                    }
+                }
+                // $conexion->close();
+                return array(
+                    "status" => "success",
+                    "factura"=> $id_factura
+                );
+            }
+            else {
+                return array(
+                    "status" => "error",
+                    "message" => "Error al crear factura"
+                );
+            }
+           
+        }
+            catch (PDOExecption $e) {
+                return array(
+                    "status" => "error",
+                    "message" => $e->getMessage()
+                );
+            }
+    }
+
+    #Obtener productos de una factura
+  	#-------------------------------------
+      static public function getFacturaProductosModel($idFactura) {
+        try {
+            $stmt = Conexion::conectar()->prepare("select cantidad, nombre as descripcion, codigo, precio_venta as subtotal from factura_producto 
+            INNER JOIN producto on factura_producto.id_producto = producto.id where factura_producto.id_factura = :idFactura");
+        
+            $stmt -> bindParam(":idFactura",$idFactura, PDO::PARAM_STR);
+              
+            if ($stmt -> execute()) {
+                return $stmt->fetchAll();
+            }
+        }
+        catch (PDOExecption $e) {
+            return "error".$e;
+          }
+      }
+
+       #Obtener detalles de una factura
+  	#-------------------------------------
+      static public function  getFacturaDetallesModel($idFactura) {
+        try {
+            $stmt = Conexion::conectar()->prepare("select nombre as cliente from factura 
+            INNER JOIN client on factura.id_cliente = client.id where factura.id = :idFactura");
+        
+            $stmt -> bindParam(":idFactura",$idFactura, PDO::PARAM_STR);
+              
+            if ($stmt -> execute()) {
+                return $stmt->fetch();
+            }
+        }
+        catch (PDOExecption $e) {
+            return "error".$e;
+          }
+      }
+
   }

@@ -241,5 +241,6 @@
 <script src="<?php echo URL; ?>src/ajax/ajax.js"></script>
 <script src="<?php echo URL; ?>src/ajax/productos.js"></script>
 <script src="<?php echo URL; ?>src/ajax/uploadAjax.js"></script>
+<script src="<?php echo URL; ?>src/ajax/crearFactura.js"></script>
 </body>
 </html>

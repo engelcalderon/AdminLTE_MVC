@@ -212,6 +212,15 @@ class Controller {
         }
     }
 
+    public function getProductController($codProducto) {
+        $product = Datos::getProductModel($codProducto);
+        if ($product["status"] == "success") {
+            echo json_encode($product);
+            return;
+        }
+        echo json_encode($response);
+    }
+
     public function mostrarDatosEditarProductoController($idProducto) {
         $response = Datos::getProductoModelByID($idProducto);
 
@@ -238,6 +247,44 @@ class Controller {
                 return;
         }
         echo json_encode($response);
+    }
+
+    public function guardarImprimirFactura($data) {
+        $response = Datos::crearFacturaModel($data);
+
+        if ($response["status"] == "success") {
+            setcookie("factura", $response["factura"], time() + 10, "/");
+        }
+        echo json_encode($response);
+    }
+
+    public function getFacturaProductos($idFactura) {
+        $response = Datos::getFacturaProductosModel($idFactura);
+        $tabla = "";
+        $total = 0;
+        foreach($response as $key => $value) {
+            $tabla .= "
+                    <tr>
+                        <td>".$value["cantidad"]."</td>
+                        <td>".$value["descripcion"]."</td>
+                        <td>".$value["codigo"]."</td>
+                        <td>CRC ".$value["subtotal"]."</td>
+                    </tr>
+                ";
+            $total += (float)$value["subtotal"];
+        }
+
+        return array(
+            "tabla"=>$tabla,
+            "total"=> $total
+        );
+    }
+
+    public function getFacturaDetalles($idFactura) {
+        $response = Datos::getFacturaDetallesModel($idFactura);
+        return array(
+            "cliente"=> $response["cliente"]
+        );
     }
 
 }

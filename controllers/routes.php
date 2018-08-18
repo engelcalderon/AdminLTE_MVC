@@ -28,6 +28,9 @@ class Routes {
                 case "dashboard/crearfactura":
                 $module = "views/dashboard/pages/crearfactura.php";
                 break;
+                case "dashboard/factura":
+                $module = "views/dashboard/pages/factura.php";
+                break;
                 case "dashboard/facturas":
                 $module = "views/dashboard/pages/facturas.php";
                 break;
