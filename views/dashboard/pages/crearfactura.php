@@ -1,6 +1,5 @@
 <?php
     include "views/dashboard/modules/header.php";
-    // require "controllers/pdfController.php";
 ?>
 
 <form method="POST" id="crearFacturaForm"></form>
@@ -23,7 +22,7 @@
     <div class="invoice">
 
        <div class="form-group">
-        <label>Codigo del cliente</label>
+        <label>Identificacion del cliente</label>
         <input type="text" id="nuevaFacturaCliente" class="form-control" placeholder="#">
       </div>
      
@@ -70,7 +69,4 @@
 
 <?php
     include ("views/dashboard/modules/footer.php");
-
-    // $pdfController = new PDFController;
-    // $pdfController->convertHTMLToPDF();
 ?>

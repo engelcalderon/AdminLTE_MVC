@@ -287,6 +287,29 @@ class Controller {
         );
     }
 
+    public function getFacturasController() {
+        $response = Datos::getFacturasModel();
+
+        if ($response != "error") {
+            foreach($response as $key => $value) {
+                echo "
+                    <tr>
+                        <td>".$value["factura"]."</td>
+                        <td>".$value["cliente"]."</td>
+                        <td>
+                            <button class='btn btn-default btn-sm' onClick='imprimirFactura(".$value["factura"].")'>
+                                <i class='fa fa-print'></i></button>
+                        </td>
+                    </tr>
+                ";
+            }
+        }
+        else {
+            echo "error";
+        }
+        
+    }
+
 }
 
 ?>

@@ -66,7 +66,7 @@ function guardarFactura() {
             response = JSON.parse(response);
             // console.log(response);
             if (response.status == "success") {
-                imprimirFactura(response.factura);
+                abrirVentanaFactura();
                 window.location.replace("facturas");
             } else {
                 console.log(response);
@@ -78,9 +78,23 @@ function guardarFactura() {
     });
 }
 
-function imprimirFactura(idFactura) {
+function abrirVentanaFactura() {
     window.open("factura");
 }
+
+function imprimirFactura(idFactura) {
+    // Cookies.set('factura', idFactura, { expires: 10, path: '' });
+    createCookie("factura", idFactura);
+    abrirVentanaFactura();
+}
+
+function createCookie(name, value) {
+    var date = new Date();
+    date.setTime(date.getTime() + (5*1000));
+    var expires = "; expires= " + date.toGMTString();
+  
+    document.cookie = name + "=" + value + expires + "; path=/";
+  }
 
 // var delete_row = $(this).data('row');
 // $('#' + delete_row).remove()

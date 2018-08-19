@@ -237,6 +237,7 @@
 <script src="<?php echo URL; ?>src/dist/js/demo.js"></script>
 <!-- Jasny Boostrap -->
 <script src="<?php echo URL; ?>src/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script> -->
 <!-- Ajax to login -->
 <script src="<?php echo URL; ?>src/ajax/ajax.js"></script>
 <script src="<?php echo URL; ?>src/ajax/productos.js"></script>

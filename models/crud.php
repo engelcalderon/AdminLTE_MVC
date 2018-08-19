@@ -428,44 +428,52 @@
     static public function crearFacturaModel($data) {
         try {
             $conexion = new PDO("mysql:host=localhost;dbname=adminlte","root","");
-            $stmt = $conexion->prepare("INSERT INTO factura(id_cliente) values (:cliente)");
-        
-            $stmt -> bindParam(":cliente",$data["cliente"], PDO::PARAM_STR);
+
+            $cliente = $conexion->prepare("SELECT id FROM client where identificacion = :id");
+            $cliente -> bindParam(":id",$data["cliente"], PDO::PARAM_STR);
+
+            if ($cliente->execute()) {
+                $clienteID = $cliente->fetch();
+
+                $stmt = $conexion->prepare("INSERT INTO factura(id_cliente) values (:cliente)");
             
-            if ($stmt -> execute()) {
+                $stmt -> bindParam(":cliente",$clienteID["id"], PDO::PARAM_STR);
+                
+                if ($stmt -> execute()) {
 
-                $id_factura =  $conexion->lastInsertId();
+                    $id_factura =  $conexion->lastInsertId();
 
-                foreach($data["productos"] as $value) {
-                    $query = "INSERT INTO factura_producto (id_factura, id_producto, cantidad) VALUES
-                    (:id_factura, :id_producto, :cantidad)";
-                    $stmt = $conexion->prepare($query);
-                    $stmt -> bindParam(":id_factura",$id_factura, PDO::PARAM_STR);
-                    $stmt -> bindParam(":id_producto", $value["producto"], PDO::PARAM_STR);
-                    $stmt -> bindParam(":cantidad",$value["cantidad"], PDO::PARAM_STR);
+                    foreach($data["productos"] as $value) {
+                        $query = "INSERT INTO factura_producto (id_factura, id_producto, cantidad) VALUES
+                        (:id_factura, :id_producto, :cantidad)";
+                        $stmt = $conexion->prepare($query);
+                        $stmt -> bindParam(":id_factura",$id_factura, PDO::PARAM_STR);
+                        $stmt -> bindParam(":id_producto", $value["producto"], PDO::PARAM_STR);
+                        $stmt -> bindParam(":cantidad",$value["cantidad"], PDO::PARAM_STR);
 
-                    if (!$stmt -> execute()) {
-                        return array(
-                            "status" => "error",
-                            "message" => "Error al insertar productos"
-                        );
-                        break;
+                        if (!$stmt -> execute()) {
+                            return array(
+                                "status" => "error",
+                                "message" => "Error al insertar productos"
+                            );
+                            break;
+                        }
                     }
+                    // $conexion->close();
+                    return array(
+                        "status" => "success",
+                        "factura"=> $id_factura
+                    );
                 }
-                // $conexion->close();
-                return array(
-                    "status" => "success",
-                    "factura"=> $id_factura
-                );
+                else {
+                    return array(
+                        "status" => "error",
+                        "message" => "Error al crear factura"
+                    );
+                }
+            
             }
-            else {
-                return array(
-                    "status" => "error",
-                    "message" => "Error al crear factura"
-                );
             }
-           
-        }
             catch (PDOExecption $e) {
                 return array(
                     "status" => "error",
@@ -507,6 +515,22 @@
         }
         catch (PDOExecption $e) {
             return "error".$e;
+          }
+      }
+
+    #Obtener todas las facturas
+  	#-------------------------------------
+      static public function  getFacturasModel() {
+        try {
+            $stmt = Conexion::conectar()->prepare("select factura.id as factura, client.nombre as cliente
+             from factura inner join client on factura.id_cliente = client.id");
+        
+            if ($stmt -> execute()) {
+                return $stmt->fetchAll();
+            }
+        }
+        catch (PDOExecption $e) {
+            return "error";
           }
       }
 
