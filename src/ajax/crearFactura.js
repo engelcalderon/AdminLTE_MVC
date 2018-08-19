@@ -27,12 +27,12 @@ $("#addProductForm").submit( function(e) {
 
                 html += `
                 <tr>
-                    <td>`+response.data["cantidad_existente"]+`</td>
+                    <td>1</td>
                     <td>`+response.data["nombre"]+`</td>
                     <td>`+response.data["codigo"]+`</td>
                     <td>`+response.data["precio_venta"]+`</td>
                     <td>
-                            <button class='btn btn-default btn-sm' onClick='buttonEliminarCliente(`+response.data["id"]+`)'><i class='fa fa-trash-o'></i></button>
+                            <button class='btn btn-default btn-sm' onClick='eliminarProductoDeFactura(this, `+response.data["id"]+`)'><i class='fa fa-trash-o'></i></button>
                     </td>
                 </tr>
                 `;
@@ -50,6 +50,13 @@ $("#addProductForm").submit( function(e) {
         }
     });
 });
+
+function eliminarProductoDeFactura(row, idProducto) {
+    row.closest("tr").remove()
+    productos = productos.filter(function(e) {
+        return e.producto != idProducto;
+    });
+}
 
 function guardarFactura() {
     $.ajax({

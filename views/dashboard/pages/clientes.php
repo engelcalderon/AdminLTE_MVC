@@ -81,7 +81,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-phone"></i>
                                             </div>
-                                                <input type="text" class="form-control" id="registroCliente_telefono" data-inputmask='"mask": "(999) 9999-9999"' data-mask>
+                                                <input type="text" class="form-control" id="registroCliente_telefono" placeholder="#">
                                             </div>   
                                         </div>
                                         <div class="col-xs-6">
@@ -202,7 +202,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-phone"></i>
                                             </div>
-                                                <input type="text" class="form-control" id="editarCliente_telefono" data-inputmask='"mask": "(999) 9999-9999"' data-mask>
+                                                <input type="text" class="form-control" id="editarCliente_telefono" placeholder="#">
                                             </div>   
                                         </div>
                                         <div class="col-xs-6">
