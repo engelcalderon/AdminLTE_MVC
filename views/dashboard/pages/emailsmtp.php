@@ -2,7 +2,7 @@
     include "views/dashboard/modules/header.php";
 ?>
 
-<form method="post">
+<form id="sendEmailForm" method="post" enctype="multipart/form-data">
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -125,10 +125,19 @@
                     <textarea class="form-control" rows="3" name="mensaje" placeholder="Mensaje ...">Test</textarea>
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Archivos Adjuntos</label>
+
+                  <div class="col-sm-10">
+                    <input type="file" id="files" name="files[]" multiple='multiple'>
+                  </div>
+                </div>
+                
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <button type="submit" class="btn btn-info pull-right">Enviar</button>
+                <button type="submit" name="sendEmail" form="sendEmailForm" class="btn btn-info pull-right">Enviar</button>
               </div>
               <!-- /.box-footer -->
             <!-- </form> -->
@@ -148,7 +157,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-</form>
+  </form>
 
 <?php
     include ("views/dashboard/modules/footer.php");

@@ -5,8 +5,10 @@ require_once "lib/phpmailer/src/PHPMailer.php";
 require_once "lib/phpmailer/src/SMTP.php";
 require_once "lib/phpmailer/src/OAuth.php";
 
+
 class EmailController {
     public function sendEmailSMTP() {
+
         // var_dump($_POST);
         if (isset($_POST["email"]) && isset($_POST["asunto"]) 
         && isset($_POST["mensaje"]) && isset($_POST["SMTPname"]) &&
@@ -45,6 +47,10 @@ class EmailController {
             $correo->Subject = $asunto;
 
             $correo->MsgHTML($mensaje);
+
+            for($i = 0; $i < count($_FILES["files"]["tmp_name"]); $i++) {
+                $correo->AddAttachment( $_FILES["files"]["tmp_name"][$i], $_FILES["files"]["tmp_name"][$i] );
+            }
 
             if (!$correo->Send()) {
                 echo "error";
