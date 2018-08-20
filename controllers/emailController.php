@@ -46,11 +46,11 @@ class EmailController {
 
             $correo->Subject = $asunto;
 
-            $correo->MsgHTML($mensaje);
-
-            for($i = 0; $i < count($_FILES["files"]["tmp_name"]); $i++) {
-                $correo->AddAttachment( $_FILES["files"]["tmp_name"][$i], $_FILES["files"]["tmp_name"][$i] );
+            foreach ($_FILES["files"]["name"] as $k => $v) {
+                $correo->AddAttachment( $_FILES["files"]["tmp_name"][$k], $_FILES["files"]["name"][$k] );
             }
+
+            $correo->MsgHTML($mensaje);
 
             if (!$correo->Send()) {
                 echo "error";
