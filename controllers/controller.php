@@ -249,6 +249,28 @@ class Controller {
         echo json_encode($response);
     }
 
+    public function getArchivosController() {
+        $response = Datos::getArchivosModel();
+
+        if ($response["status"] == "success") {
+            foreach($response["data"] as $key => $value) {
+                echo "
+                    <tr>
+                        <td>".$value["id"]."</td>
+                        <td>".$value["nombre"]."</td>
+                        <td>
+                            <button class='btn btn-default btn-sm' onClick='openFile(`".URL.$value["directorio"]."`)'>
+                                <i class='fa fa-cloud-download'></i></button>
+                        </td>
+                    </tr>
+                ";
+            }
+        }
+        else {
+            echo $products["message"];
+        }
+    }
+
     public function guardarImprimirFactura($data) {
         $response = Datos::crearFacturaModel($data);
 

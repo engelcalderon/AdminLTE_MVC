@@ -400,3 +400,7 @@ function buttonEliminarCliente(id) {
     }
 }
 
+function openFile (url) {
+    window.open(url);
+}
+

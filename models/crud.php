@@ -423,6 +423,33 @@
           }
     }
 
+     #Obtener todos los archivos
+  	#-------------------------------------
+      static public function getArchivosModel() {
+        try {
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM archivo");
+
+          if ($stmt->execute()) {
+              return array(
+                  "status"=> "success",
+                  "data" => $stmt->fetchAll()
+              );
+          }
+
+          return array(
+              "status" => "error",
+              "message" => "Unknown"
+          );
+          
+      }
+      catch (PDOExecption $e) {
+          return array(
+              "status" => "error",
+              "message" => $e->getMessage()
+          );
+      }
+    }
+
      #Crear factura y agregar productos
   	#-------------------------------------
     static public function crearFacturaModel($data) {

@@ -1,4 +1,6 @@
-function upload_image() {
+$("#botonSubirArchivoGuardar").click(function(e) {
+    e.preventDefault();
+
     var respuesta = "";
     var inputFile = $("#file")[0];
     var file = inputFile.files[0];
@@ -13,6 +15,8 @@ function upload_image() {
             contentType: false,
             cache: false,
             processData: false,
+            beforeSend: function(response) {
+            },
             success: function(objeto) {
                 if (objeto==0) {
 
@@ -30,7 +34,9 @@ function upload_image() {
 
                 }
                 else {
-                    $("#file2").val(objeto);
+                    // $("#file2").val(objeto);
+                    $("#modal-subirArchivo").modal('show');
+                    setTimeout(function() {window.location.reload();}, 500);
                     console.log(objeto);
                 }
             },
@@ -41,6 +47,6 @@ function upload_image() {
         });
     }
     else {
-        errorNot("Ocurrio error interno");
+       console.log("Ocurrio error interno");
     }
-}
+});
